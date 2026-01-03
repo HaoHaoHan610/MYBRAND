@@ -1,0 +1,9 @@
+langchain
+langchain-mcp-adapters
+langchain-openai
+langchain-google-genai
+langgraph
+python-dotenv
+firecrawl-py
+pydantic
+
