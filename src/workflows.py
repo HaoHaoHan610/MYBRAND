@@ -7,13 +7,15 @@ from .firecrawl import FirecrawlService
 from dotenv import load_dotenv
 from .prompts import ImprovingBackground
 
+
 class WorkFlow:
     def __init__(self):
         self.firecrawl = FirecrawlService()
         self.llm = ChatOpenAI(model="gpt-4o-mini",temperature=0.3)
         self.prompts = ImprovingBackground()
 
-    def _analyze_advise(self,state:PotentialAnalysis):
+    def _analyze_potential(self,state:PotentialAnalysis):
+        load_dotenv()
         print(f"Analyzing your background....")
         structure_llm = self.llm.with_structured_output(PotentialAnalysis)
 

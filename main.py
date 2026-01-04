@@ -9,4 +9,4 @@ pa = PotentialAnalysis(
     achievements=["Built a small web app"],
     mentor=True
 )
-print(run._analyze_advise(pa))
+print(run._analyze_potential(pa))
