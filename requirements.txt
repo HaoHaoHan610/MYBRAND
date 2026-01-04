@@ -8,4 +8,4 @@ firecrawl-py
 pydantic
 OpenAI
 scrapy
-
+langchain-huggingface

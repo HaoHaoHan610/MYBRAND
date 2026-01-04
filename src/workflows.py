@@ -1,6 +1,7 @@
 from typing import Dict, Any, List, Optional
 from langgraph.graph import StateGraph, END
 from langchain_openai import ChatOpenAI
+from langchain_ollama import ChatOllama
 from langchain_core.messages import HumanMessage, SystemMessage
 from .models import PotentialAnalysis, PersonalProfile, StudentCase
 from .firecrawl import FirecrawlService
@@ -12,7 +13,7 @@ import os
 class WorkFlow:
     def __init__(self):
         self.firecrawl = FirecrawlService()
-        self.llm = ChatOpenAI(model="gpt-4o-mini",api_key=os.getenv('OPENAI_API_KEY'),temperature=0.3)
+        self.llm = ChatOpenAI(model="gpt-4o-mini",temperature=0.3)
         self.prompts = ImprovingBackground()
 
     def _analyze_potential(self,state:PotentialAnalysis):
