@@ -38,12 +38,12 @@ class Goals(BaseModel):
 
 
 class PersonalProfile(BaseModel):
-    hoppies: List[str] = []
-    personality: Optional[str] = None
+    hobbies: List[str] = []
+    personality: List[str] = []
     unique_brand: Optional[str] = None
     study_style: Optional[str] = None
-    exciting_topics = List[str] = []
-    goals: Optional[Goals] = None
+    exciting_topics: List[str] = []
+    goals: Dict[str,List[str]] = {}
 
     def __call__(self) -> Dict[str, Any]:
         return self.model_dump()
