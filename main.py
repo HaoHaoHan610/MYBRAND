@@ -16,7 +16,7 @@ pp = PersonalProfile(
     unique_brand="Kĩ năng giao tiếp tốt",
     study_style="Có tính tự học tìm hiểu cái mới",
     exciting_topics=["Quản lý chuổi cung ứng"],
-    goals={"short_term":["đậu internship"], "mid_term":["làm 2 project portfolio"], "long_term":["ML engineer"]}
+    goals={"short_term":["đậu internship"], "mid_term":["Học thêm các chứng chỉ quản lý"], "long_term":["Làm quản lý chuổi cung ứng"]}
 )
 print(run._analyze_potential(pa))
 print(run._analyze_personality(pp))
