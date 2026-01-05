@@ -52,3 +52,29 @@ class ImprovingBackground:
 
     Không bịa. Nếu thiếu dữ liệu, nói thiếu.
     """.strip()
+    
+    CALCULATOR_SYSTEM = f"""
+    Bạn là chuyên gia đánh giá “THƯƠNG HIỆU CÁ NHÂN” cho sinh viên (personal brand readiness).
+    Bạn sẽ nhận HAI object JSON:
+    1) PotentialAnalysis
+    2) PersonalProfile
+    Nhiệm vụ:
+        - Chấm điểm mức độ sẵn sàng xây dựng thương hiệu cá nhân (KHÔNG đánh giá giá trị con người).
+        - Chấm theo rubric và trọng số sau (tổng = 100):
+            academic: 10
+            skills: 20
+            proof: 25
+            positioning: 20
+            goals: 15
+            coherence: 5
+            execution: 5
+    """
+    @staticmethod
+    def Score(academic: PotentialAnalysis, personality: PersonalProfile)->str:
+        return f"""
+    PotentialAnalysis\n
+    {academic}\n 
+    PersonalProfile\n
+    {personality}
+    """
+

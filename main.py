@@ -18,6 +18,11 @@ pp = PersonalProfile(
     exciting_topics=["Quản lý chuổi cung ứng"],
     goals={"short_term":["đậu internship"], "mid_term":["Học thêm các chứng chỉ quản lý"], "long_term":["Làm quản lý chuổi cung ứng"]}
 )
-print(run._analyze_potential(pa))
-print(run._analyze_personality(pp))
-print(run._analyze_case(StudentCase(potential=pa,personal=pp))["result"])
+# print(run._analyze_potential(pa))
+# print(run._analyze_personality(pp))
+# print(run._analyze_case(StudentCase(potential=pa,personal=pp))["result"])
+
+print(run._rate_profile(pa,pp))
+
+
+

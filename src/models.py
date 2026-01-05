@@ -1,5 +1,6 @@
 
 from typing import List, Dict, Any, Optional
+from google.genai.types import ProactivityConfig
 from pydantic import BaseModel
 
 from pydantic_core.core_schema import bool_schema # Define field as annotated attributes
@@ -21,21 +22,6 @@ class PotentialAnalysis(BaseModel):
 
     def __str__(self) -> str:
         return self.model_dump_json(indent=2)
-
-class Goals(BaseModel):
-    short_term: List[str] = []
-    mid_term: List[str] = []
-    long_term: List[str] = []
-
-    def __call__(self) -> Dict[str, Any]:
-        return self.model_dump()
-
-    def __iter__(self):
-        yield from self.model_dump().items()
-
-    def __str__(self) -> str:
-        return self.model_dump_json(indent=2)
-
 
 class PersonalProfile(BaseModel):
     hobbies: List[str] = []
@@ -69,5 +55,43 @@ class StudentCase(BaseModel):
     def __str__(self) -> str:
         return self.model_dump_json(indent=2)
 
+class RubricScore(BaseModel):
+    academic: int # 10
+    skills: int # 20
+    proof: int # 25
+    positioning: int # 20
+    goals: int # 15
+    coherence: int # 5
+    execution: int # 5
+
+    def __call__(self) -> Dict[str, Any]:
+        return self.model_dump()
+
+    def __iter__(self):
+        yield from self.model_dump().items()
+
+    def __str__(self) -> str:
+        return self.model_dump_json(indent=2)
+    
+    def _overall(self) -> Dict[float,str]:
+        score = (
+                self.academic + 
+                self.skills + 
+                self.proof + 
+                self.positioning + 
+                self.goals + 
+                self.coherence +
+                self.execution
+                )/100
+        kind = ""
+        
+        if score <= 50:
+            kind = "weak"
+        elif 50 < score <= 70:
+            kind = "ok"
+        else:
+            kind = "strong"
+
+        return {score:kind}
 
     
