@@ -49,6 +49,11 @@ class ImprovingBackground:
     - Lỗ hổng lớn nhất đang làm hồ sơ yếu (1 câu)
     - Việc ưu tiên #1 trong 7 ngày để tăng “proof” (1 câu)
     - 1 câu positioning cuối cùng (1 câu)
+    Và cho tui 3 chủ đề để tui có thê tìm kiếm trên internet để tìm kiếm thêm cách để cải thiện điều trên:
+        article
+        book
+        newspaper
+        Certification/course
 
     Không bịa. Nếu thiếu dữ liệu, nói thiếu.
     """.strip()

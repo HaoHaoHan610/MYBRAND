@@ -1,4 +1,4 @@
-from src.models import  PotentialAnalysis, PersonalProfile, StudentCase
+from src.models import  PotentialAnalysis, PersonalProfile, StudentCase, improving
 from src.workflows import WorkFlow
 
 run = WorkFlow()
@@ -20,11 +20,12 @@ pp = PersonalProfile(
 )
 # print(run._analyze_potential(pa))
 # print(run._analyze_personality(pp))
-# print(run._analyze_case(StudentCase(potential=pa,personal=pp))["result"])
-#
+advice = run._analyze_case(StudentCase(potential=pa,personal=pp))
+print(advice)
+print(run._search_information(advice))
 # print(run._rate_profile(pa,pp))
 
-print(run._search_information(pa,pp))
+# print(run._search_information(pa,pp))
 
 
 

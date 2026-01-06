@@ -58,6 +58,24 @@ class StudentCase(BaseModel):
     def __str__(self) -> str:
         return self.model_dump_json(indent=2)
 
+class improving(BaseModel):
+    advice: str
+    aricle:str
+    books: str
+    newspaper: str
+    certificatin_course:str
+    
+    def __call__(self) -> Dict[str, Any]:
+        return self.model_dump()
+
+    def __iter__(self):
+        yield from self.model_dump().items()
+
+    def __str__(self) -> str:
+        return self.model_dump_json(indent=2)
+
+
+
 class RubricScore(BaseModel):
     academic: int # 10
     skills: int # 20

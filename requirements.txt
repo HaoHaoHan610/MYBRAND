@@ -4,7 +4,6 @@ langchain-openai
 langchain-google-genai
 langgraph
 python-dotenv
-firecrawl-py
 pydantic
 scrapy
 langchain-anthropic

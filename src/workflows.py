@@ -3,7 +3,7 @@ from langgraph.graph import StateGraph, END
 from langchain_openai import ChatOpenAI
 from langchain_google_genai import GoogleGenerativeAI
 from langchain_core.messages import HumanMessage, SystemMessage
-from .models import PotentialAnalysis, PersonalProfile, StudentCase, RubricScore
+from .models import PotentialAnalysis, PersonalProfile, StudentCase, RubricScore, improving
 from .firecrawl import FirecrawlService
 from dotenv import load_dotenv
 from .prompts import ImprovingBackground
@@ -15,7 +15,7 @@ class WorkFlow:
         self.firecrawl = FirecrawlService()
         # Analyzing models
         self.llm1 = ChatOpenAI(model= "gpt-4o-mini",temperature=0.1)
-        self.llm2 = GoogleGenerativeAI(model = "gemini-2.5-flash",temperature = 0.3)
+        self.llm2 = GoogleGenerativeAI(model = "gemini-2.5-flash",temperature = 0.3,api_key = os.getenv("GEMINI_API_KEY"))
         self.llm3 = GoogleGenerativeAI(model = "gemini-2.5-flash",temperature =0.3,api_key = os.getenv("GOOGLE_API_KEY2")) 
         self.prompts = ImprovingBackground()
 
@@ -24,8 +24,8 @@ class WorkFlow:
         # structure_llm = self.llm.with_structured_output(PotentialAnalysis)
 
         messages = [
-                {"role":"system","content":self.prompts.HE_THONG_THUONG_HIEU_CA_NHAN},
-                {"role":"user","content":self.prompts.BackgroundAnalysis(state)}
+                SystemMessage(self.prompts.HE_THONG_THUONG_HIEU_CA_NHAN),
+                HumanMessage(self.prompts.BackgroundAnalysis(state))
                 ]
 
         try:
@@ -51,9 +51,9 @@ class WorkFlow:
             print(e)
             return {"result":"Failed to generate"}
         
-    def _analyze_case(self,state:StudentCase)-> Dict[str,Any]:
+    def _analyze_case(self,state:StudentCase)->improving:
         print(f"Analyzing your Case....")
-        # structure_llm = self.llm.with_structured_output(PotentialAnalysis)
+        structure_llm = self.llm1.with_structured_output(improving)
 
         messages = [
                 SystemMessage(content=self.prompts.HE_THONG_THUONG_HIEU_CA_NHAN),
@@ -61,11 +61,11 @@ class WorkFlow:
                 ]
 
         try:
-            result = self.llm3.invoke(messages)
-            return {"result": result}
+            result = structure_llm.invoke(messages)
+            return result
         except Exception as e:
             print(e)
-            return {"result":"Failed to generate"}
+            return {}
     
     def _rate_profile(self,academic: PotentialAnalysis, personality: PersonalProfile) -> RubricScore:
         structured_llm = self.llm1.with_structured_output(RubricScore)
@@ -94,13 +94,5 @@ class WorkFlow:
                     coherence=0,
                     execution=0
                 )
-    def _search_information(self,academic:PotentialAnalysis,personality:PersonalProfile):
-        print("Searching...")
-        try:
-            result = self.firecrawl.search_query(self.prompts.search(academic,personality),num_results=3)
-            return result
-        except Exception as e:
-            print(e)
-            return {}
 
 
