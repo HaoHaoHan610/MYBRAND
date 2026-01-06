@@ -35,3 +35,5 @@ class FirecrawlService:
         except Exception as e:
             print(e)
             return []
+
+    def embedding(self,)

@@ -9,7 +9,7 @@ from .firecrawl import FirecrawlService
 from dotenv import load_dotenv
 from .prompts import ImprovingBackground
 import os
-
+import getpass
 
 class WorkFlow:
     def __init__(self):
@@ -18,16 +18,19 @@ class WorkFlow:
         # Analyzing models
         self.llm1 = ChatOpenAI(model= "gpt-4o-mini",temperature=0.1)
 
+        if not os.getenv("HUGGINGFACEHUB_API_TOKEN"):
+            os.environ["HUGGINGFACEHUB_API_TOKEN"] = getpass.getpass("Enter your token: ")
         hg_llm = HuggingFaceEndpoint(
-                repo_id="microsoft/Phi-3-mini-4k-instruct",
-                task= "text-generation",
-                provider= "auto",
-                temperature=0.2,
-                max_new_tokens=512
-                )
+            repo_id="microsoft/Phi-3-mini-4k-instruct",
+            task="text-generation",
+            provider="hf-inference",   # serverless HF (free-tier credits)
+            max_new_tokens=512,
+            do_sample=False,
+            temperature=0.2,
+        )
 
         self.llm2 = ChatHuggingFace(llm = hg_llm)
-        self.llm3 = GoogleGenerativeAI(model = "gemini-2.0-flask",temperature = 0.3)
+        self.llm3 = GoogleGenerativeAI(model = "gemini-2.5-flash",temperature = 0.3)
         self.prompts = ImprovingBackground()
 
     def _analyze_potential(self,state:PotentialAnalysis):
@@ -40,8 +43,8 @@ class WorkFlow:
                 ]
 
         try:
-            result = self.llm2.invoke(messages)
-            return result.content
+            result = self.llm3.invoke(messages)
+            return result
         except Exception as e:
             print(e)
             return {"Failed to generate"}
@@ -56,8 +59,8 @@ class WorkFlow:
                 ]
 
         try:
-            result = self.llm2.invoke(messages)
-            return {"result": result.content}
+            result = self.llm3.invoke(messages)
+            return {"result": result}
         except Exception as e:
             print(e)
             return {"result":"Failed to generate"}
