@@ -77,4 +77,21 @@ class ImprovingBackground:
     PersonalProfile\n
     {personality}
     """
+    @staticmethod
+    def search(academic:PotentialAnalysis,personality:PersonalProfile)->str:
+        return f"""
+    PotentialAnalysis\n 
+    {academic}\n
+    PersonalProfile\n
+    {personality}\n
+    Nhiệm vụ: Tạo danh sách truy vấn tìm kiếm (search queries) để tìm:
+    bài báo khoa học (ưu tiên survey/review + keyword ‘survey’, ‘review’, ‘systematic review’),
+    sách/giáo trình (textbook, lecture notes, syllabus),
+    chứng chỉ/khóa học uy tín (Coursera/edX/Google/Microsoft/AWS/Cisco… hoặc chứng chỉ học thuật liên quan).
+    Yêu cầu đầu ra:
+        Trả về 3, chia nhóm: (A) Papers/Surveys, (B) Textbooks/Notes, (C) Certifications/Courses
+        Mỗi query gồm: query (chuỗi tìm kiếm), platform (Google Scholar/arXiv/ACM/IEEE/Google), reason (1 câu giải thích vì sao hợp với profile).
+        Query viết bằng tiếng Anh là chính, kèm 1 biến thể tiếng Việt nếu phù hợp.
+        Dùng operator khi cần: quotes, AND/OR, site:, filetype:pdf, intitle:, syllabus.
+    """
 

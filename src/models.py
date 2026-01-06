@@ -1,9 +1,12 @@
 
 from typing import List, Dict, Any, Optional
 from google.genai.types import ProactivityConfig
+from langchain_core import messages
 from pydantic import BaseModel
+from openai import OpenAI
+import os
 
-from pydantic_core.core_schema import bool_schema # Define field as annotated attributes
+from pydantic_core.core_schema import bool_schema, list_schema # Define field as annotated attributes
 
 class PotentialAnalysis(BaseModel):
     major: str
@@ -93,5 +96,23 @@ class RubricScore(BaseModel):
             kind = "strong"
 
         return {score:kind}
-
     
+class deepseek():
+    def __init__(self,model):
+        
+        self.base_url = "https://api.deepseek.com"
+        self.model = model
+        self.api_key = os.getenv("DEEPSEEK_API_KEY")
+        self.client = OpenAI(base_url=self.base_url,api_key=self.api_key)
+
+    def invoke(self,message):
+        try: 
+            response = self.client.chat.completions.create(
+                    messages = message,
+                    model=self.model,
+                    )
+            return response
+        except Exception as e:
+            print(e)
+            return {}
+

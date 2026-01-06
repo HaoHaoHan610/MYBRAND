@@ -36,4 +36,4 @@ class FirecrawlService:
             print(e)
             return []
 
-    def embedding(self,)
+    # def embedding(self,)

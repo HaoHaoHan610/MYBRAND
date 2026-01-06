@@ -1,7 +1,6 @@
 from typing import Dict, Any, List, Optional
 from langgraph.graph import StateGraph, END
 from langchain_openai import ChatOpenAI
-from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
 from langchain_google_genai import GoogleGenerativeAI
 from langchain_core.messages import HumanMessage, SystemMessage
 from .models import PotentialAnalysis, PersonalProfile, StudentCase, RubricScore
@@ -9,7 +8,6 @@ from .firecrawl import FirecrawlService
 from dotenv import load_dotenv
 from .prompts import ImprovingBackground
 import os
-import getpass
 
 class WorkFlow:
     def __init__(self):
@@ -17,20 +15,8 @@ class WorkFlow:
         self.firecrawl = FirecrawlService()
         # Analyzing models
         self.llm1 = ChatOpenAI(model= "gpt-4o-mini",temperature=0.1)
-
-        if not os.getenv("HUGGINGFACEHUB_API_TOKEN"):
-            os.environ["HUGGINGFACEHUB_API_TOKEN"] = getpass.getpass("Enter your token: ")
-        hg_llm = HuggingFaceEndpoint(
-            repo_id="microsoft/Phi-3-mini-4k-instruct",
-            task="text-generation",
-            provider="hf-inference",   # serverless HF (free-tier credits)
-            max_new_tokens=512,
-            do_sample=False,
-            temperature=0.2,
-        )
-
-        self.llm2 = ChatHuggingFace(llm = hg_llm)
-        self.llm3 = GoogleGenerativeAI(model = "gemini-2.5-flash",temperature = 0.3)
+        self.llm2 = GoogleGenerativeAI(model = "gemini-2.5-flash",temperature = 0.3)
+        self.llm3 = GoogleGenerativeAI(model = "gemini-2.5-flash",temperature =0.3,api_key = os.getenv("GOOGLE_API_KEY2")) 
         self.prompts = ImprovingBackground()
 
     def _analyze_potential(self,state:PotentialAnalysis):
@@ -38,8 +24,8 @@ class WorkFlow:
         # structure_llm = self.llm.with_structured_output(PotentialAnalysis)
 
         messages = [
-                SystemMessage(content=self.prompts.HE_THONG_THUONG_HIEU_CA_NHAN),
-                HumanMessage(content = self.prompts.BackgroundAnalysis(state))
+                {"role":"system","content":self.prompts.HE_THONG_THUONG_HIEU_CA_NHAN},
+                {"role":"user","content":self.prompts.BackgroundAnalysis(state)}
                 ]
 
         try:
@@ -75,8 +61,8 @@ class WorkFlow:
                 ]
 
         try:
-            result = self.llm1.invoke(messages)
-            return {"result": result.content}
+            result = self.llm3.invoke(messages)
+            return {"result": result}
         except Exception as e:
             print(e)
             return {"result":"Failed to generate"}
@@ -108,6 +94,13 @@ class WorkFlow:
                     coherence=0,
                     execution=0
                 )
-        
+    def _search_information(self,academic:PotentialAnalysis,personality:PersonalProfile):
+        print("Searching...")
+        try:
+            result = self.firecrawl.search_query(self.prompts.search(academic,personality),num_results=3)
+            return result
+        except Exception as e:
+            print(e)
+            return {}
 
 
