@@ -115,22 +115,3 @@ class RubricScore(BaseModel):
 
         return {score:kind}
     
-class deepseek():
-    def __init__(self,model):
-        
-        self.base_url = "https://api.deepseek.com"
-        self.model = model
-        self.api_key = os.getenv("DEEPSEEK_API_KEY")
-        self.client = OpenAI(base_url=self.base_url,api_key=self.api_key)
-
-    def invoke(self,message):
-        try: 
-            response = self.client.chat.completions.create(
-                    messages = message,
-                    model=self.model,
-                    )
-            return response
-        except Exception as e:
-            print(e)
-            return {}
-
