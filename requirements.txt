@@ -9,3 +9,6 @@ langchain-anthropic
 openai 
 trafilatura
 ddgs
+flask
+marshmallow
+
