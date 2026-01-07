@@ -4,15 +4,15 @@ from langchain_openai import ChatOpenAI
 from langchain_google_genai import GoogleGenerativeAI
 from langchain_core.messages import HumanMessage, SystemMessage
 from .models import PotentialAnalysis, PersonalProfile, StudentCase, RubricScore, improving
-from .firecrawl import FirecrawlService
 from dotenv import load_dotenv
 from .prompts import ImprovingBackground
 import os
+from .engine import gogoduck_trafilatura_openai
 
 class WorkFlow:
     def __init__(self):
+        load_dotenv()
         # Scrape model
-        self.firecrawl = FirecrawlService()
         # Analyzing models
         self.llm1 = ChatOpenAI(model= "gpt-4o-mini",temperature=0.1)
         self.llm2 = GoogleGenerativeAI(model = "gemini-2.5-flash",temperature = 0.3,api_key = os.getenv("GEMINI_API_KEY"))
@@ -94,5 +94,5 @@ class WorkFlow:
                     coherence=0,
                     execution=0
                 )
-
-
+    def _search_information(self,advide:improving):
+        gogoduck_trafilatura_openai(query=advide.newspaper)

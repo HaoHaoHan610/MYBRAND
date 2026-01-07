@@ -1,5 +1,5 @@
-from src.models import  PotentialAnalysis, PersonalProfile, StudentCase, improving
-from src.workflows import WorkFlow
+from src.agent.models import  PotentialAnalysis, PersonalProfile, StudentCase, improving
+from src.agent.workflows import WorkFlow
 
 run = WorkFlow()
 pa = PotentialAnalysis(

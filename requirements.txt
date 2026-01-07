@@ -5,6 +5,7 @@ langchain-google-genai
 langgraph
 python-dotenv
 pydantic
-scrapy
 langchain-anthropic
-OpenAI
+openai 
+trafilatura
+ddgs

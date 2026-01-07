@@ -1,0 +1,40 @@
+{
+  "query": "system analysis and design certificate",
+  "region": "vn-vi",
+  "backend": "duckduckgo",
+  "model": "gpt-4o-mini",
+  "max_input_chars": 9000,
+  "max_output_tokens": 180,
+  "results": [
+    {
+      "rank": 1,
+      "title": "Certificate in Information Systems Design & Analysis",
+      "url": "https://informaconnect.com/systems-design-analysis/",
+      "snippet": "Join our systems analysis training to explore different analysis and design techniques and learn how to apply them successfully. Sign up now.",
+      "extracted_chars": 3761,
+      "sent_chars": 3761,
+      "summary": "- Khóa học Chứng chỉ Chuyên nghiệp về Phân tích và Thiết kế Hệ thống cung cấp kiến thức về các kỹ thuật mô hình hóa trong SLDCs.  \n- Các nhà phân tích hệ thống sẽ học cách biến yêu cầu kinh doanh thành thông số kỹ thuật và tham gia vào các bài tập thực hành.  \n- Giảng viên Steve PMP có hơn 55 năm kinh nghiệm trong lĩnh vực Công nghệ Thông tin và sẽ hướng dẫn khóa học.",
+      "error": ""
+    },
+    {
+      "rank": 2,
+      "title": "Certificate in Systems Analysis and Design (CSAD)",
+      "url": "https://www.tonex.com/training-courses/certificate-in-systems-analysis-and-design-csad/",
+      "snippet": "The Certificate in Systems Analysis and Design (CSAD) offered by Tonex provides comprehensive training in the principles, methodologies, and techniques essential for proficient systems analysts and designers.",
+      "extracted_chars": 2014,
+      "sent_chars": 2014,
+      "summary": "- Khóa học Chứng nhận Phân tích và Thiết kế Hệ thống (CSAD) của Tonex cung cấp đào tạo toàn diện về các nguyên tắc và phương pháp cần thiết cho nhà phân tích và thiết kế hệ thống.  \n- Khóa học tập trung vào vòng đời phát triển hệ thống bao gồm từ khái niệm ban đầu đến triển khai và bảo trì, với các kỹ năng phân tích yêu cầu doanh nghiệp và thiết kế kiến trúc hệ thống.  \n- Đối tượng tham gia khóa học bao gồm các nhà phân tích hệ thống, kỹ sư phần mềm, nhà tư vấn CNTT và những ai muốn phát triển sự nghiệp trong lĩnh vực này.",
+      "error": ""
+    },
+    {
+      "rank": 3,
+      "title": "Best System Design Courses & Certificates [2026] | Coursera",
+      "url": "https://www.coursera.org/courses?query=system+design",
+      "snippet": "System design courses can help you learn architectural patterns, scalability principles, performance optimization, and system reliability. Compare course options to find what fits your goals. Enroll for free.",
+      "extracted_chars": 5226,
+      "sent_chars": 5226,
+      "summary": "- Nội dung cung cấp nhiều kỹ năng liên quan đến phát triển phần mềm, kiến trúc phần mềm, API và thiết kế hệ thống.  \n- Các khóa học và chứng chỉ xuyên suốt từ cơ bản đến nâng cao, kéo dài từ 1 đến 6 tháng.  \n- Không thấy đề cập đến các thông tin cụ thể về tên khóa học hoặc tổ chức đào tạo.",
+      "error": ""
+    }
+  ]
+}
