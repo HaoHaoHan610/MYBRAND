@@ -1,9 +1,12 @@
 from flask import Flask, jsonify
-
+from api.controllers.input import bp as bp_input
 
 def create_app():
     app = Flask(__name__)
     
+    app.register_blueprint(bp_input)
+
+
     @app.route('/')
     def home():
         return '<h1>Khanh bu cu</h1>'
