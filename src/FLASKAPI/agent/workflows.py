@@ -100,6 +100,46 @@ class WorkFlow:
                     coherence=0,
                     execution=0
                 )
+
     def _search_information(self,advide:improving):
-        
-        return gogoduck_trafilatura_openai(query=advide.newspaper)
+
+
+        queries = []
+        if getattr(advide, "newspaper", None):
+            queries.append(advide.newspaper)
+        if getattr(advide, "books", None):
+            queries.append(advide.books)
+        if getattr(advide, "article", None):
+            queries.append(advide.article)
+        if getattr(advide, "certificatin_course", None):
+            queries.append(advide.certificatin_course)
+
+
+        if not queries and getattr(advide, "advice", None):
+            queries.append(advide.advice)
+
+        query = " ".join(q for q in queries if q).strip()
+        if not query:
+            return {}
+
+        payload = gogoduck_trafilatura_openai(
+            query=query,
+            k=3,
+            region="vn-vi",
+            backend="duckduckgo",
+            model="gpt-4o-mini",
+            verbose=False,
+        )
+
+
+        results = payload.get("results", []) if isinstance(payload, dict) else []
+        web_links = {}
+        for item in results:
+            if not isinstance(item, dict):
+                continue
+            title = (item.get("title") or "").strip() or f"link_{item.get('rank', len(web_links) + 1)}"
+            url = (item.get("url") or "").strip()
+            if url:
+                web_links[title] = url
+
+        return web_links
