@@ -1,16 +1,18 @@
 {
-  "major": "CS",
-  "gpa": 3.2,
-  "year": 1,
+  "major": "Computer Science",
+  "gpa": 3.8,
+  "year": 3,
   "strengths": [
-    "C++",
-    "math"
+    "Problem Solving",
+    "Team Collaboration"
   ],
   "language": {
-    "en": "B2"
+    "English": "Native",
+    "Spanish": "Intermediate"
   },
   "achievements": [
-    "project A"
+    "Dean's List 2024",
+    "Hackathon Winner"
   ],
   "mentor": true
 }

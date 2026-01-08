@@ -16,7 +16,6 @@ class WorkFlow:
         # Analyzing models
         self.llm1 = ChatOpenAI(model= "gpt-4o-mini",temperature=0.1)
         self.llm2 = GoogleGenerativeAI(model = "gemini-2.5-flash",temperature = 0.3,api_key = os.getenv("GEMINI_API_KEY"))
-        self.llm3 = GoogleGenerativeAI(model = "gemini-2.5-flash",temperature =0.3,api_key = os.getenv("GOOGLE_API_KEY2")) 
         self.prompts = ImprovingBackground()
 
     def _analyze_potential(self,state:PotentialAnalysis):
@@ -29,7 +28,7 @@ class WorkFlow:
                 ]
 
         try:
-            result = self.llm3.invoke(messages)
+            result = self.llm2.invoke(messages)
             return {"result":result}
         except Exception as e:
             print(e)
@@ -45,7 +44,7 @@ class WorkFlow:
                 ]
 
         try:
-            result = self.llm3.invoke(messages)
+            result = self.llm2.invoke(messages)
             return {"result": result}
         except Exception as e:
             print(e)
@@ -90,7 +89,7 @@ class WorkFlow:
             result = structured_llm.invoke(message)
             return result
         except Exception as e:
-            print(e)
+            print(str(e))
             return RubricScore(
                     academic=0,
                     goals = 0,

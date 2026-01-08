@@ -2,7 +2,9 @@ from agent.models import PersonalProfile, PotentialAnalysis
 from pathlib import Path
 import json
 
-POTENTIAL_PATH = Path("data/potential.json")
+# Get the directory where this file is located (FLASKAPI directory)
+BASE_DIR = Path(__file__).parent.parent
+POTENTIAL_PATH = BASE_DIR / "data" / "potential.json"
 
 def save_potential(potential: PotentialAnalysis) -> None:
     POTENTIAL_PATH.parent.mkdir(parents=True, exist_ok=True)
@@ -19,7 +21,7 @@ def load_potential() -> "PotentialAnalysis":
     return PotentialAnalysis.model_validate(data)  # Pydantic v2
 
 
-PERSONALITY_PATH = Path("data/personality.json")
+PERSONALITY_PATH = BASE_DIR / "data" / "personality.json"
 
 def save_personality(personality: PersonalProfile) -> None:
     PERSONALITY_PATH.parent.mkdir(parents=True, exist_ok=True)

@@ -1,39 +1,26 @@
 {
   "hobbies": [
-    "gym",
-    "basketball",
-    "coding",
-    "motorbike tinkering"
+    "Reading",
+    "Coding"
   ],
   "personality": [
-    "thẳng tính",
-    "ham học",
-    "cầu toàn",
-    "hơi nóng"
+    "Analytical",
+    "Creative"
   ],
-  "unique_brand": "IT student who builds stuff fast and explains it simply",
-  "study_style": "project-based + spaced repetition + practice problems",
+  "unique_brand": "Problem solver with creative thinking",
+  "study_style": "hands-on",
   "exciting_topics": [
-    "AI/ML",
-    "data engineering",
-    "system design",
-    "performance tuning"
+    "AI",
+    "Web Development"
   ],
   "goals": {
     "short_term": [
-      "GPA >= 8.5 kỳ 2",
-      "nắm chắc OOP + STL",
-      "làm 30 bài LeetCode easy"
-    ],
-    "mid_term": [
-      "xây 2 project portfolio",
-      "IELTS speaking trôi chảy",
-      "internship mùa hè"
+      "Complete internship",
+      "Build portfolio"
     ],
     "long_term": [
-      "ML Engineer",
-      "master system design",
-      "build a strong personal brand"
+      "Senior developer role",
+      "Tech lead position"
     ]
   }
 }

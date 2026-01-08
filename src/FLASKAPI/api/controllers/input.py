@@ -2,9 +2,7 @@ from flask import Blueprint, jsonify, request
 
 from api.schemas.inputschema import PotentialAnalysisSchema, PersonalProfileSchema
 from agent.models import PotentialAnalysis, PersonalProfile
-
-from pathlib import Path
-import json
+from services.loadFile import save_potential, save_personality
 
 PotentialAnalysisRequest = PotentialAnalysisSchema()
 PersonalProfileRequest = PersonalProfileSchema()
