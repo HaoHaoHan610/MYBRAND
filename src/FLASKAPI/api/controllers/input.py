@@ -3,11 +3,14 @@ from flask import Blueprint, jsonify, request
 from api.schemas.inputschema import PotentialAnalysisSchema, PersonalProfileSchema
 from agent.models import PotentialAnalysis, PersonalProfile
 
+from pathlib import Path
+import json
 
 PotentialAnalysisRequest = PotentialAnalysisSchema()
 PersonalProfileRequest = PersonalProfileSchema()
 
 bp = Blueprint("UserInput",__name__,url_prefix="/input")
+
 
 @bp.route("/potential",methods = ["POST"])
 def PotentialAnalysisInput():
@@ -16,7 +19,7 @@ def PotentialAnalysisInput():
     if errors:
         return jsonify(errors),400
     try:
-       potential = PotentialAnalysis(
+        potential = PotentialAnalysis(
       major = data.get("major"),
       gpa= data.get("gpa"),
       year = data.get("year"),
@@ -25,7 +28,10 @@ def PotentialAnalysisInput():
       achievements=data.get("achievements"),
       mentor=data.get("mentor")
        )
-       return jsonify(PotentialAnalysisRequest.dump(potential)),201
+
+        save_potential(potential=potential)
+
+        return jsonify(PotentialAnalysisRequest.dump(potential)),201
     except Exception as e:
         return jsonify({"error":str(e)}),400
 
@@ -44,7 +50,8 @@ def PersonalProfileInput():
     exciting_topics = data.get("exciting_topics"),
     goals = data.get("goals")
        )
-       return jsonify(PotentialAnalysisRequest.dump(personality)),201
+       save_personality(personality=personality)
+       return jsonify(PersonalProfileRequest.dump(personality)),201
     except Exception as e:
         return jsonify({"error":str(e)}),400
 

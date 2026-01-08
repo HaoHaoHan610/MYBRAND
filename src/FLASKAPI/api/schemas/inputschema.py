@@ -10,8 +10,8 @@ class PotentialAnalysisSchema(Schema):
     mentor = fields.Boolean(required=True)
 
 class PersonalProfileSchema(Schema):
-    hobbies = fields.Str(required=True)
-    personality = fields.Str(required=True)
+    hobbies = fields.List(fields.Str(required=True))
+    personality = fields.List(fields.Str(required=True))
     unique_brand = fields.Str()
     study_style = fields.Str()
     exciting_topics = fields.List(fields.Str())

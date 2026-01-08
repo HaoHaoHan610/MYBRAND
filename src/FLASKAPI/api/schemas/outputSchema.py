@@ -1,3 +1,5 @@
+from operator import truediv
+from typing import Required
 from marshmallow import fields, Schema
 
 class improvingSchema(Schema):
@@ -16,9 +18,8 @@ class RubricScoreSchema(Schema):
     coherence = fields.Int(required=True) # 5
     execution = fields.Int(required= True) # 5
 
-
-
-
- 
-
- 
+class ConclusionSchema(Schema):
+    personalityResult = fields.Str(required=True)
+    potentialResult = fields.Str(required=True)
+    totalResult = fields.Str(required = True)
+    rubricResult = fields.Nested(RubricScoreSchema,required=True)

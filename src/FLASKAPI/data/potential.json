@@ -1,0 +1,16 @@
+{
+  "major": "CS",
+  "gpa": 3.2,
+  "year": 1,
+  "strengths": [
+    "C++",
+    "math"
+  ],
+  "language": {
+    "en": "B2"
+  },
+  "achievements": [
+    "project A"
+  ],
+  "mentor": true
+}
