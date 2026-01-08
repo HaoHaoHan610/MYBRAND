@@ -101,4 +101,5 @@ class WorkFlow:
                     execution=0
                 )
     def _search_information(self,advide:improving):
-        gogoduck_trafilatura_openai(query=advide.newspaper)
+        
+        return gogoduck_trafilatura_openai(query=advide.newspaper)

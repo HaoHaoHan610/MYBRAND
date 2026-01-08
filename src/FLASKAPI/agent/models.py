@@ -123,4 +123,5 @@ class Conclusion(BaseModel):
     potentialResult: str
     source_advice: improving
     rubricResult: RubricScore
+    web: Dict[str,str] = {}
 

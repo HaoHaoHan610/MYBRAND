@@ -165,10 +165,6 @@ NỘI DUNG:
         "region": region,
         "backend": backend,
         "model": model,
-        "max_input_chars": max_input_chars,
-        "max_output_tokens": max_output_tokens,
-        "timeout_sec": timeout_sec,
-        "created_at": datetime.now(timezone.utc).isoformat(),
         "results": output,
     }
 

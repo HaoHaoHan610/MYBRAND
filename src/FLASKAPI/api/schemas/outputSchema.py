@@ -23,3 +23,4 @@ class ConclusionSchema(Schema):
     potentialResult = fields.Str(required=True)
     totalResult = fields.Str(required = True)
     rubricResult = fields.Nested(RubricScoreSchema,required=True)
+    web = fields.Dict(keys=fields.Str(),values=fields.Str())
