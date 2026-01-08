@@ -30,10 +30,10 @@ class WorkFlow:
 
         try:
             result = self.llm3.invoke(messages)
-            return result
+            return {"result":result}
         except Exception as e:
             print(e)
-            return {"Failed to generate"}
+            return {"result":"Failed to generate"}
 
     def _analyze_personality(self,state:PersonalProfile)-> Dict[str,Any]:
         print(f"Analyzing your personality....")
@@ -65,7 +65,13 @@ class WorkFlow:
             return result
         except Exception as e:
             print(e)
-            return {}
+            return improving(
+            advice="",
+            newspaper = "",
+            books="",
+            certificatin_course="",
+            article = ""
+            )
     
     def _rate_profile(self,academic: PotentialAnalysis, personality: PersonalProfile) -> RubricScore:
         structured_llm = self.llm1.with_structured_output(RubricScore)

@@ -4,7 +4,7 @@ from marshmallow import fields, Schema
 
 class improvingSchema(Schema):
     advice = fields.Str(required=True)
-    aricle = fields.Str(required=  True)
+    atricle = fields.Str(required=  True)
     books = fields.Str(required = True)
     newspaper = fields.Str(required = True)
     certificatin_course = fields.Str(required=True)

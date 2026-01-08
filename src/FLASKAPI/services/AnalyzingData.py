@@ -11,16 +11,16 @@ def  _return_result(UserID: Optional[str] = None):
         file_personality = load_personality()
         personlity = run._analyze_personality(file_personality)
 
-        total = run._analyze_case(StudentCase(potential = potential,personal=personlity))
+        total = run._analyze_case(StudentCase(potential = file_potential,personal=file_personality))
         
-        rate = run._rate_profile(personality=personlity,academic=potential)
+        rate = run._rate_profile(personality=file_personality,academic=file_potential)
     except Exception as e:
+        print(e)
         return {}
-    return Conclusion(
-            potentialResult = potential,
-            personalityResult = personlity,
-            totalResult= 
-            
-
-
+    return {"result":Conclusion(
+            potentialResult = potential["result"],
+            personalityResult = personlity["result"],
+            source_advice=total,
+            rubricResult=rate,
             )
+            }

@@ -62,7 +62,7 @@ class StudentCase(BaseModel):
 
 class improving(BaseModel):
     advice: str
-    aricle:str
+    article:str
     books: str
     newspaper: str
     certificatin_course:str
@@ -121,6 +121,6 @@ class RubricScore(BaseModel):
 class Conclusion(BaseModel):
     personalityResult: str
     potentialResult: str
-    totalResult: str
+    source_advice: improving
     rubricResult: RubricScore
 
