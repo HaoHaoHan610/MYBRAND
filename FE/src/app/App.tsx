@@ -4,7 +4,9 @@ import { ResultsPanel } from "./components/results-panel";
 import { Badge } from "./components/ui/badge";
 import { Toaster } from "./components/ui/sonner";
 import { motion, AnimatePresence } from "motion/react";
-import { Sparkles } from "lucide-react";
+import { Sparkles, ArrowRight } from "lucide-react";
+import { CoverPage } from "./components/cover-page";
+import { Button } from "./components/ui/button";
 
 export interface PersonalProfile {
   hobbies: string[];
@@ -51,6 +53,7 @@ export interface AnalysisResult {
 }
 
 export default function App() {
+  const [showCoverPage, setShowCoverPage] = useState(true);
   const [results, setResults] = useState<AnalysisResult | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -200,8 +203,74 @@ export default function App() {
     setError(null);
   };
 
+  // Show cover page first
+  if (showCoverPage) {
+    return (
+    <CoverPage
+      title="HỆ THỐNG PHÂN TÍCH TIỀM NĂNG VÀ ĐỊNH VỊ THƯƠNG HIỆU CÁ NHÂN"
+      subject="Design Thinking"
+      className="Lớp 01"
+      instructor="PGS. TS. VÕ CÔNG PHƯƠNG"
+      groupNumber={4}
+      members={[
+        {
+          name: "Lê Thiên Hạo",
+          studentId: "089206010393",
+          role: "Nhóm trưởng",
+        },
+        {
+          name: "Nguyễn Chí Bình",
+          studentId: "056206000081",
+          role: "Thành viên",
+        },
+        {
+          name: "Đậu Thị Hoài Thương",
+          studentId: "056306004065",
+          role: "Thành viên",
+        },
+        {
+          name: "Nguyễn Văn Thành Đạt",
+          studentId: "038206014471",
+          role: "Thành viên",
+        },        
+        {
+          name: "Nguyễn Anh Khoa",
+          studentId: "075206022205",
+          role: "Thành viên",
+        },
+        {
+          name: "Đào An Xuyên",
+          studentId: "052306008226",
+          role: "Thành viên",
+        },
+
+
+      ]}
+      groupPhotos={[
+        // Add your group photo URLs here, or leave empty for placeholder
+        // Example: "/images/group-photo-1.jpg",
+        // "/images/group-photo-2.jpg",
+      ]}
+      school="Trường Đại học Giao thông Vận Tải TP.HCM"
+      submissionDate="08 tháng 1, 2026"
+    />
+  );
+
+  }
+
   return (
     <div className="dark min-h-screen bg-[#0a0a0a] text-foreground relative overflow-hidden">
+      {/* Button to go back to cover page */}
+      <div className="fixed top-4 left-4 z-50">
+        <Button
+          onClick={() => setShowCoverPage(true)}
+          variant="outline"
+          size="sm"
+          className="bg-[#0a0a0a]/80 backdrop-blur border-white/10"
+        >
+          Trang bìa
+        </Button>
+      </div>
       <Toaster />
       
       {/* Background decorative elements */}

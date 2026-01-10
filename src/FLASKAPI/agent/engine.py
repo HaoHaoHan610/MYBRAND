@@ -83,7 +83,7 @@ NỘI DUNG:
         return (resp.output_text or "").strip()
 
     # ---- OpenAI client ----
-    key = api_key or os.getenv("OPENAI_API_KEY")
+    key = api_key or os.getenv("OPENAI_API_KEY2")
     if not key:
         raise RuntimeError("Thiếu OPENAI_API_KEY (env) hoặc truyền api_key=... vào hàm.")
     client = OpenAI(api_key=key)
