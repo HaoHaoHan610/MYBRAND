@@ -1,7 +1,8 @@
 import { Separator } from "./ui/separator";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { motion } from "motion/react";
-import { Sparkles, Users, GraduationCap, Calendar } from "lucide-react";
+import { Sparkles, Users, GraduationCap, Calendar, ArrowRight } from "lucide-react";
+import { Button } from "./ui/button";
 
 interface GroupMember {
   name: string;
@@ -22,6 +23,7 @@ interface CoverPageProps {
   school?: string;
   department?: string;
   submissionDate?: string;
+  onNavigateToMain?: () => void; // Callback to navigate to main page
 }
 
 export function CoverPage({
@@ -36,6 +38,7 @@ export function CoverPage({
   school = "Trường Đại Học",
   department = "Khoa Công Nghệ Thông Tin",
   submissionDate,
+  onNavigateToMain,
 }: CoverPageProps) {
   const currentDate = submissionDate || new Date().toLocaleDateString("vi-VN", {
     year: "numeric",
@@ -45,6 +48,25 @@ export function CoverPage({
 
   return (
     <div className="dark min-h-screen bg-[#0a0a0a] text-foreground relative overflow-hidden">
+      {/* Navigation Button - Top Right */}
+      {onNavigateToMain && (
+        <motion.div
+          className="fixed top-4 right-4 z-50"
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+        >
+          <Button
+            onClick={onNavigateToMain}
+            size="lg"
+            className="bg-gradient-to-r from-emerald-500 to-blue-600 hover:from-emerald-600 hover:to-blue-700 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 group"
+          >
+            <span>Đến trang phân tích</span>
+            <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+          </Button>
+        </motion.div>
+      )}
+
       {/* Background Image với overlay mờ */}
       {backgroundImage && (
         <div className="fixed inset-0 z-0">
@@ -68,169 +90,125 @@ export function CoverPage({
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-purple-500/3 rounded-full blur-3xl" />
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12 relative z-10">
+      <div className="relative z-10">
         {/* Header Section */}
-        <motion.div 
-          className="mb-8 sm:mb-12"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <div className="flex items-center gap-3 mb-4">
-            <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-emerald-500 to-blue-600 flex items-center justify-center">
-              <Sparkles className="h-6 w-6 text-white" />
+        <div className="container mx-auto px-4 sm:px-6 py-4 sm:py-6">
+          <motion.div 
+            className="mb-4 sm:mb-6"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
+              <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl bg-gradient-to-br from-emerald-500 to-blue-600 flex items-center justify-center">
+                <Sparkles className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
+              </div>
+              <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground leading-tight">
+                {title}
+              </h1>
             </div>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground">
-              {title}
-            </h1>
-          </div>
-          <div className="flex flex-wrap items-center gap-3 text-sm sm:text-base text-muted-foreground">
-            <span className="font-semibold text-emerald-400">{subject}</span>
-            <span className="text-white/30">|</span>
-            <span>{className}</span>
-            <span className="text-white/30">|</span>
-            <span className="italic">GV: {instructor}</span>
-          </div>
-        </motion.div>
-
-        {/* Main Content - 2 Columns Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-12">
-          {/* Left Column - Group Information */}
-          <motion.div 
-            className="space-y-6"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <Card className="bg-[#111111] border-white/10">
-              <CardHeader>
-                <div className="flex items-center gap-2">
-                  <Users className="h-5 w-5 text-emerald-400" />
-                  <CardTitle className="text-xl">Nhóm {groupNumber}</CardTitle>
-                </div>
-              </CardHeader>
-              <CardContent>
-                {/* Members Table */}
-                <div className="overflow-x-auto">
-                  <table className="w-full border-collapse text-sm">
-                    <thead>
-                      <tr className="bg-[#1a1a1a] border-b border-white/10">
-                        <th className="px-4 py-3 text-left font-semibold text-foreground">
-                          Họ tên
-                        </th>
-                        <th className="px-4 py-3 text-left font-semibold text-foreground">
-                          MSSV
-                        </th>
-                        <th className="px-4 py-3 text-left font-semibold text-foreground">
-                          Vai trò
-                        </th>
-                        {members.some((m) => m.email) && (
-                          <th className="px-4 py-3 text-left font-semibold text-foreground">
-                            Email
-                          </th>
-                        )}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {members.map((member, index) => (
-                        <tr
-                          key={index}
-                          className="border-b border-white/5 hover:bg-[#1a1a1a]/50 transition-colors"
-                        >
-                          <td className="px-4 py-3 text-foreground">
-                            {member.name}
-                          </td>
-                          <td className="px-4 py-3 text-muted-foreground font-mono">
-                            {member.studentId}
-                          </td>
-                          <td className="px-4 py-3 text-muted-foreground">
-                            {member.role}
-                          </td>
-                          {members.some((m) => m.email) && (
-                            <td className="px-4 py-3 text-muted-foreground text-xs">
-                              {member.email || "-"}
-                            </td>
-                          )}
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-
-          {/* Right Column - Group Photos */}
-          <motion.div 
-            className="space-y-4"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            <Card className="bg-[#111111] border-white/10">
-              <CardHeader>
-                <div className="flex items-center gap-2">
-                  <GraduationCap className="h-5 w-5 text-blue-400" />
-                  <CardTitle className="text-xl">Ảnh nhóm</CardTitle>
-                </div>
-              </CardHeader>
-              <CardContent>
-                {groupPhotos.length > 0 ? (
-                  <div
-                    className={`grid gap-4 ${
-                      groupPhotos.length === 1
-                        ? "grid-cols-1"
-                        : groupPhotos.length <= 4
-                        ? "grid-cols-2"
-                        : "grid-cols-3"
-                    }`}
-                  >
-                    {groupPhotos.map((photo, index) => (
-                      <div
-                        key={index}
-                        className="relative aspect-square overflow-hidden rounded-lg border-2 border-white/10"
-                      >
-                        <img
-                          src={photo}
-                          alt={`Group photo ${index + 1}`}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="relative aspect-[4/3] overflow-hidden rounded-lg border-2 border-dashed border-white/20 bg-[#1a1a1a] flex items-center justify-center">
-                    <div className="text-center text-muted-foreground">
-                      <svg
-                        className="w-16 h-16 mx-auto mb-2"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                        />
-                      </svg>
-                      <p className="text-sm font-medium">Group Photo</p>
-                    </div>
-                  </div>
-                )}
-              </CardContent>
-            </Card>
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs sm:text-sm text-muted-foreground">
+              <span className="font-semibold text-emerald-400">{subject}</span>
+              <span className="text-white/30">|</span>
+              <span>{className}</span>
+              <span className="text-white/30">|</span>
+              <span className="italic">GV: {instructor}</span>
+            </div>
           </motion.div>
         </div>
 
+        {/* Main Content - Group Photo Full Width with Overlay Members */}
+        <div className="relative mb-4 sm:mb-6 w-full">
+          {/* Group Photo - Full Width Background */}
+          <motion.div 
+            className="relative w-full h-[350px] sm:h-[400px] lg:h-[450px] overflow-hidden z-0"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            {groupPhotos.length > 0 ? (
+              <>
+                <img
+                  src={groupPhotos[0]}
+                  alt="Group Photo"
+                  className="w-full h-full object-cover object-center brightness-[0.4] contrast-75"
+                  style={{ objectPosition: 'center 30%' }}
+                />
+                {/* Dark overlay để làm ảnh tối và mờ, phù hợp với background */}
+                <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/75 backdrop-blur-[2px]" />
+                <div className="absolute inset-0 bg-[#0a0a0a]/40" />
+              </>
+            ) : (
+              <div className="relative w-full h-full bg-[#1a1a1a] flex items-center justify-center border-y border-dashed border-white/20">
+                <div className="text-center text-muted-foreground">
+                  <GraduationCap className="w-16 h-16 mx-auto mb-3 text-white/30" />
+                  <p className="text-base sm:text-lg font-medium text-white/50">Ảnh nhóm</p>
+                  <p className="text-xs sm:text-sm text-white/30 mt-1">Group Photo</p>
+                </div>
+              </div>
+            )}
+          </motion.div>
+          
+          {/* Member Cards - Overlaying on Group Photo */}
+          <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none py-4">
+            <motion.div 
+              className="w-full max-w-[1400px] mx-auto px-3 sm:px-4 pointer-events-auto"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4 lg:gap-5">
+                {members.map((member, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
+                    whileHover={{ y: -8, scale: 1.02 }}
+                    className="group cursor-pointer flex-[0_0_auto] w-[calc(50%-4px)] sm:w-[calc(33.333%-8px)] lg:w-[260px] xl:w-[280px]"
+                  >
+                    <Card className="bg-[#111111]/95 backdrop-blur-md border-white/20 hover:border-emerald-400/50 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-emerald-500/10 h-full">
+                      <CardContent className="p-4 sm:p-5">
+                        <div className="flex items-start gap-3 sm:gap-4">
+                          {/* Avatar/Icon */}
+                          <div className="flex-shrink-0">
+                            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-emerald-500/20 to-blue-500/20 border-2 border-emerald-400/30 flex items-center justify-center">
+                              <Users className="h-6 w-6 sm:h-7 sm:w-7 text-emerald-400" />
+                            </div>
+                          </div>
+                          {/* Member Info */}
+                          <div className="flex-1 min-w-0">
+                            <h3 className="text-sm sm:text-base font-semibold text-foreground mb-1.5 break-words group-hover:text-emerald-400 transition-colors leading-tight">
+                              {member.name}
+                            </h3>
+                            <p className="text-xs text-muted-foreground font-mono mb-2 break-all">
+                              {member.studentId}
+                            </p>
+                            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-400/20">
+                              <span className="text-xs font-medium text-emerald-400">
+                                {member.role}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </div>
+
         {/* Footer */}
-        <motion.div 
-          className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-white/10"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-        >
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
+        <div className="container mx-auto px-4 sm:px-6 pb-4 sm:pb-6">
+          <motion.div 
+            className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-white/10"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+          >
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-3 text-xs sm:text-sm text-muted-foreground">
             <div className="flex items-center gap-2">
               <GraduationCap className="h-4 w-4 text-emerald-400" />
               <span className="font-semibold text-foreground">{school}</span>
@@ -246,8 +224,25 @@ export function CoverPage({
               <span className="font-medium text-foreground">Ngày nộp:</span>
               <span>{currentDate}</span>
             </div>
+            {onNavigateToMain && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.7 }}
+              >
+                <Button
+                  onClick={onNavigateToMain}
+                  variant="outline"
+                  className="border-emerald-400/30 hover:border-emerald-400 hover:bg-emerald-400/10 text-emerald-400 group"
+                >
+                  <span>Bắt đầu phân tích</span>
+                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </motion.div>
+            )}
           </div>
         </motion.div>
+        </div>
       </div>
     </div>
   );

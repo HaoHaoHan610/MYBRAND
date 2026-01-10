@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { ProfileForm } from "./components/profile-form";
 import { ResultsPanel } from "./components/results-panel";
 import { Badge } from "./components/ui/badge";
@@ -243,16 +243,20 @@ export default function App() {
           studentId: "052306008226",
           role: "Thành viên",
         },
+        {
+          name: "Đào An Xuyên",
+          studentId: "052306008226",
+          role: "Thành viên",
+        },
 
 
       ]}
       groupPhotos={[
-        // Add your group photo URLs here, or leave empty for placeholder
-        // Example: "/images/group-photo-1.jpg",
-        // "/images/group-photo-2.jpg",
+        "/truong-dai-hoc-giao-thong-van-tai-tphcm.jpg"
       ]}
       school="Trường Đại học Giao thông Vận Tải TP.HCM"
       submissionDate="08 tháng 1, 2026"
+      onNavigateToMain={() => setShowCoverPage(false)}
     />
   );
 
@@ -294,7 +298,7 @@ export default function App() {
                 <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-emerald-500 to-blue-600 flex items-center justify-center">
                   <Sparkles className="h-5 w-5 text-white" />
                 </div>
-                <h1 className="text-2xl sm:text-3xl tracking-tight">Advice Dashboard</h1>
+                <h1 className="text-2xl sm:text-3xl tracking-tight">Bảng Điều Khiển Phân Tích</h1>
               </motion.div>
               <AnimatePresence mode="wait">
                 <motion.div
@@ -312,7 +316,7 @@ export default function App() {
                         : "border-blue-500/30 bg-blue-500/10 text-blue-400"
                     } px-3 sm:px-4 py-1 sm:py-1.5 text-xs sm:text-sm`}
                   >
-                    {results ? "Analysis Complete" : "Ready to Analyze"}
+                    {results ? "Hoàn thành phân tích" : "Sẵn sàng phân tích"}
                   </Badge>
                 </motion.div>
               </AnimatePresence>
@@ -323,7 +327,7 @@ export default function App() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              Personal + Potential analysis and curated resources
+              Phân tích tiềm năng và định vị thương hiệu cá nhân
             </motion.p>
           </div>
         </div>

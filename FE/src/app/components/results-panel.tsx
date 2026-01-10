@@ -83,7 +83,7 @@ export function ResultsPanel({ results, isLoading, error, onRetry }: ResultsPane
     if (results) {
       const jsonString = JSON.stringify(results, null, 2);
       navigator.clipboard.writeText(jsonString);
-      toast.success("Full results copied to clipboard");
+      toast.success("Đã sao chép toàn bộ kết quả");
     }
   };
 
@@ -120,7 +120,7 @@ export function ResultsPanel({ results, isLoading, error, onRetry }: ResultsPane
     return (
       <Alert className="bg-destructive/10 border-destructive/30">
         <AlertCircle className="h-5 w-5 text-destructive" />
-        <AlertTitle>Analysis Failed</AlertTitle>
+        <AlertTitle>Phân tích thất bại</AlertTitle>
         <AlertDescription className="mt-2 space-y-3">
           <p>{error}</p>
           <Button
@@ -129,7 +129,7 @@ export function ResultsPanel({ results, isLoading, error, onRetry }: ResultsPane
             size="sm"
             className="border-destructive/30 bg-destructive/10 hover:bg-destructive/20"
           >
-            Try Again
+            Thử lại
           </Button>
         </AlertDescription>
       </Alert>
@@ -154,7 +154,7 @@ export function ResultsPanel({ results, isLoading, error, onRetry }: ResultsPane
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
-            No Results Yet
+            Chưa có kết quả
           </motion.h3>
           <motion.p
             className="text-sm sm:text-base text-muted-foreground text-center max-w-sm px-4"
@@ -162,8 +162,8 @@ export function ResultsPanel({ results, isLoading, error, onRetry }: ResultsPane
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
           >
-            Fill out your profile on the left and click "Analyze Profile" to see your
-            personalized analysis and recommendations.
+            Điền thông tin hồ sơ ở bên trái và nhấn "Phân tích hồ sơ" để xem
+            phân tích và gợi ý cá nhân hóa của bạn.
           </motion.p>
         </CardContent>
       </Card>
@@ -199,49 +199,49 @@ export function ResultsPanel({ results, isLoading, error, onRetry }: ResultsPane
 
   const rubricMetrics = [
     { 
-      name: "Academic", 
+      name: "Học thuật", 
       value: results.rubricResult.academic, 
       max: maxScores.academic,
       percentage: (results.rubricResult.academic / maxScores.academic) * 100,
       color: "bg-blue-500" 
     },
     { 
-      name: "Skills", 
+      name: "Kỹ năng", 
       value: results.rubricResult.skills, 
       max: maxScores.skills,
       percentage: (results.rubricResult.skills / maxScores.skills) * 100,
       color: "bg-emerald-500" 
     },
     { 
-      name: "Proof", 
+      name: "Bằng chứng", 
       value: results.rubricResult.proof, 
       max: maxScores.proof,
       percentage: (results.rubricResult.proof / maxScores.proof) * 100,
       color: "bg-purple-500" 
     },
     { 
-      name: "Positioning", 
+      name: "Định vị", 
       value: results.rubricResult.positioning, 
       max: maxScores.positioning,
       percentage: (results.rubricResult.positioning / maxScores.positioning) * 100,
       color: "bg-amber-500" 
     },
     { 
-      name: "Goals", 
+      name: "Mục tiêu", 
       value: results.rubricResult.goals, 
       max: maxScores.goals,
       percentage: (results.rubricResult.goals / maxScores.goals) * 100,
       color: "bg-pink-500" 
     },
     { 
-      name: "Coherence", 
+      name: "Tính mạch lạc", 
       value: results.rubricResult.coherence, 
       max: maxScores.coherence,
       percentage: (results.rubricResult.coherence / maxScores.coherence) * 100,
       color: "bg-cyan-500" 
     },
     { 
-      name: "Execution", 
+      name: "Thực thi", 
       value: results.rubricResult.execution, 
       max: maxScores.execution,
       percentage: (results.rubricResult.execution / maxScores.execution) * 100,
@@ -265,7 +265,7 @@ export function ResultsPanel({ results, isLoading, error, onRetry }: ResultsPane
           className="border-white/10 bg-[#1a1a1a]"
         >
           <Copy className="h-4 w-4 mr-2" />
-          Copy Full JSON
+          Sao chép JSON đầy đủ
         </Button>
       </motion.div>
 
@@ -281,17 +281,17 @@ export function ResultsPanel({ results, isLoading, error, onRetry }: ResultsPane
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
                   <Sparkles className="h-5 w-5 text-emerald-400" />
-                  <CardTitle className="text-xl">Personality Analysis</CardTitle>
+                  <CardTitle className="text-xl">Phân tích tính cách</CardTitle>
                 </div>
-                <CardDescription>Based on your profile and traits</CardDescription>
+                <CardDescription>Dựa trên hồ sơ và đặc điểm của bạn</CardDescription>
               </div>
               <Button
-                onClick={() => copyToClipboard(results.personalityResult, "Personality Analysis")}
+                onClick={() => copyToClipboard(results.personalityResult, "Phân tích tính cách")}
                 variant="ghost"
                 size="icon"
                 className="hover:bg-white/5"
               >
-                {copiedSection === "Personality Analysis" ? (
+                {copiedSection === "Phân tích tính cách" ? (
                   <CheckCircle2 className="h-4 w-4 text-emerald-400" />
                 ) : (
                   <Copy className="h-4 w-4" />
@@ -317,22 +317,22 @@ export function ResultsPanel({ results, isLoading, error, onRetry }: ResultsPane
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
                   <TrendingUp className="h-5 w-5 text-blue-400" />
-                  <CardTitle className="text-xl">Potential Assessment</CardTitle>
+                  <CardTitle className="text-xl">Đánh giá tiềm năng</CardTitle>
                 </div>
-                <CardDescription>Your capabilities and growth path</CardDescription>
+                <CardDescription>Khả năng và con đường phát triển của bạn</CardDescription>
               </div>
               <Button
                 onClick={() =>
                   copyToClipboard(
                     results.potentialResult,
-                    "Potential Assessment"
+                    "Đánh giá tiềm năng"
                   )
                 }
                 variant="ghost"
                 size="icon"
                 className="hover:bg-white/5"
               >
-                {copiedSection === "Potential Assessment" ? (
+                {copiedSection === "Đánh giá tiềm năng" ? (
                   <CheckCircle2 className="h-4 w-4 text-emerald-400" />
                 ) : (
                   <Copy className="h-4 w-4" />
@@ -356,18 +356,18 @@ export function ResultsPanel({ results, isLoading, error, onRetry }: ResultsPane
           <CardHeader>
             <div className="flex items-center gap-2">
               <BookOpen className="h-5 w-5 text-purple-400" />
-              <CardTitle className="text-xl">Curated Resources</CardTitle>
+              <CardTitle className="text-xl">Tài nguyên được tuyển chọn</CardTitle>
             </div>
-            <CardDescription>Personalized recommendations across categories</CardDescription>
+            <CardDescription>Gợi ý cá nhân hóa theo danh mục</CardDescription>
           </CardHeader>
           <CardContent>
             <Tabs defaultValue="advice" className="w-full">
               <TabsList className="grid w-full grid-cols-5 bg-[#1a1a1a]">
-                <TabsTrigger value="advice">Advice</TabsTrigger>
-                <TabsTrigger value="article">Articles</TabsTrigger>
-                <TabsTrigger value="books">Books</TabsTrigger>
-                <TabsTrigger value="newspaper">News</TabsTrigger>
-                <TabsTrigger value="certification">Courses</TabsTrigger>
+                <TabsTrigger value="advice">Lời khuyên</TabsTrigger>
+                <TabsTrigger value="article">Bài viết</TabsTrigger>
+                <TabsTrigger value="books">Sách</TabsTrigger>
+                <TabsTrigger value="newspaper">Tin tức</TabsTrigger>
+                <TabsTrigger value="certification">Khóa học</TabsTrigger>
               </TabsList>
 
               <TabsContent value="advice" className="space-y-2 mt-4">
@@ -434,9 +434,9 @@ export function ResultsPanel({ results, isLoading, error, onRetry }: ResultsPane
           <CardHeader>
             <div className="flex items-center gap-2">
               <Award className="h-5 w-5 text-amber-400" />
-              <CardTitle className="text-xl">Skills Assessment</CardTitle>
+              <CardTitle className="text-xl">Đánh giá kỹ năng</CardTitle>
             </div>
-            <CardDescription>Your evaluated competencies across key areas</CardDescription>
+            <CardDescription>Năng lực được đánh giá qua các lĩnh vực chính</CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             {/* Radar Chart */}
@@ -456,7 +456,7 @@ export function ResultsPanel({ results, isLoading, error, onRetry }: ResultsPane
                   />
                   <PolarRadiusAxis angle={90} domain={[0, 100]} tick={{ fill: "#71717a" }} />
                   <Radar
-                    name="Scores"
+                    name="Điểm số"
                     dataKey="value"
                     stroke="#10b981"
                     fill="#10b981"
@@ -471,7 +471,7 @@ export function ResultsPanel({ results, isLoading, error, onRetry }: ResultsPane
                     }}
                     formatter={(value: number, name: string, props: any) => {
                       const metric = rubricMetrics.find(m => m.name === props.skill);
-                      return [`${metric?.value}/${metric?.max} (${value.toFixed(1)}%)`, "Score"];
+                      return [`${metric?.value}/${metric?.max} (${value.toFixed(1)}%)`, "Điểm"];
                     }}
                   />
                 </RadarChart>
@@ -522,9 +522,9 @@ export function ResultsPanel({ results, isLoading, error, onRetry }: ResultsPane
           <CardHeader>
             <div className="flex items-center gap-2">
               <LinkIcon className="h-5 w-5 text-cyan-400" />
-              <CardTitle className="text-xl">Recommended Resources</CardTitle>
+              <CardTitle className="text-xl">Tài nguyên được đề xuất</CardTitle>
             </div>
-            <CardDescription>Curated articles and external links</CardDescription>
+            <CardDescription>Bài viết được tuyển chọn và liên kết ngoài</CardDescription>
           </CardHeader>
           <CardContent>
             <ul className="space-y-3">
