@@ -12,5 +12,6 @@ ddgs
 flask
 flask-cors
 marshmallow
+gunicorn
 
 
