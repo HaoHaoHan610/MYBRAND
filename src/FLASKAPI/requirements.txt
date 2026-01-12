@@ -1,0 +1,17 @@
+langchain
+langchain-mcp-adapters
+langchain-openai
+langchain-google-genai
+langgraph
+python-dotenv
+pydantic
+langchain-anthropic
+openai
+trafilatura
+ddgs
+flask
+flask-cors
+marshmallow
+gunicorn
+
+
