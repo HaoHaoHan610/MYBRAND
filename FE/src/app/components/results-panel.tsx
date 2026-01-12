@@ -199,6 +199,7 @@ export function ResultsPanel({ results, isLoading, error, onRetry }: ResultsPane
 
   const rubricMetrics = [
     { 
+      key: "academic",
       name: "Học thuật", 
       value: results.rubricResult.academic, 
       max: maxScores.academic,
@@ -206,6 +207,7 @@ export function ResultsPanel({ results, isLoading, error, onRetry }: ResultsPane
       color: "bg-blue-500" 
     },
     { 
+      key: "skills",
       name: "Kỹ năng", 
       value: results.rubricResult.skills, 
       max: maxScores.skills,
@@ -213,6 +215,7 @@ export function ResultsPanel({ results, isLoading, error, onRetry }: ResultsPane
       color: "bg-emerald-500" 
     },
     { 
+      key: "proof",
       name: "Bằng chứng", 
       value: results.rubricResult.proof, 
       max: maxScores.proof,
@@ -220,6 +223,7 @@ export function ResultsPanel({ results, isLoading, error, onRetry }: ResultsPane
       color: "bg-purple-500" 
     },
     { 
+      key: "positioning",
       name: "Định vị", 
       value: results.rubricResult.positioning, 
       max: maxScores.positioning,
@@ -227,6 +231,7 @@ export function ResultsPanel({ results, isLoading, error, onRetry }: ResultsPane
       color: "bg-amber-500" 
     },
     { 
+      key: "goals",
       name: "Mục tiêu", 
       value: results.rubricResult.goals, 
       max: maxScores.goals,
@@ -234,6 +239,7 @@ export function ResultsPanel({ results, isLoading, error, onRetry }: ResultsPane
       color: "bg-pink-500" 
     },
     { 
+      key: "coherence",
       name: "Tính mạch lạc", 
       value: results.rubricResult.coherence, 
       max: maxScores.coherence,
@@ -241,6 +247,7 @@ export function ResultsPanel({ results, isLoading, error, onRetry }: ResultsPane
       color: "bg-cyan-500" 
     },
     { 
+      key: "execution",
       name: "Thực thi", 
       value: results.rubricResult.execution, 
       max: maxScores.execution,
@@ -480,7 +487,7 @@ export function ResultsPanel({ results, isLoading, error, onRetry }: ResultsPane
 
             {/* Progress Bars */}
             {rubricMetrics.map((metric, idx) => {
-              const animatedValue = animatedValues[metric.name.toLowerCase().replace(/ /g, "_")] || 0;
+              const animatedValue = animatedValues[metric.key] ?? 0;
               const animatedPercentage = (animatedValue / metric.max) * 100;
               
               return (
