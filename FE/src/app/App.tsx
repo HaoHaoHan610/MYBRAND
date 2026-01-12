@@ -244,7 +244,7 @@ export default function App() {
           role: "Thành viên",
         },
         {
-          name: "Đào An Xuyên",
+          name: "Nguyễn Đắc Lợi",
           studentId: "052306008226",
           role: "Thành viên",
         },
