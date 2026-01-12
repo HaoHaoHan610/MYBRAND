@@ -68,7 +68,7 @@ export default function App() {
     try {
       const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
 
-      // Step 1: Send potential analysis data
+      // Bước 1: Gửi dữ liệu phân tích tiềm năng
       const potentialResponse = await fetch(`${API_BASE_URL}/input/potential`, {
         method: 'POST',
         headers: {
@@ -86,7 +86,7 @@ export default function App() {
       });
 
       if (!potentialResponse.ok) {
-        let errorMessage = 'Failed to submit potential analysis';
+        let errorMessage = 'Không thể gửi dữ liệu phân tích tiềm năng';
         try {
           const errorData = await potentialResponse.json();
           errorMessage = errorData.error || errorMessage;
@@ -96,7 +96,7 @@ export default function App() {
         throw new Error(errorMessage);
       }
 
-      // Step 2: Send personal profile data
+      // Bước 2: Gửi dữ liệu hồ sơ cá nhân
       const personalityResponse = await fetch(`${API_BASE_URL}/input/personality`, {
         method: 'POST',
         headers: {
@@ -113,7 +113,7 @@ export default function App() {
       });
 
       if (!personalityResponse.ok) {
-        let errorMessage = 'Failed to submit personal profile';
+        let errorMessage = 'Không thể gửi hồ sơ cá nhân';
         try {
           const errorData = await personalityResponse.json();
           errorMessage = errorData.error || errorMessage;
@@ -123,7 +123,7 @@ export default function App() {
         throw new Error(errorMessage);
       }
 
-      // Step 3: Get analysis results
+      // Bước 3: Lấy kết quả phân tích
       const resultsResponse = await fetch(`${API_BASE_URL}/AnalyzedData/Advices`, {
         method: 'GET',
         headers: {
@@ -132,7 +132,7 @@ export default function App() {
       });
 
       if (!resultsResponse.ok) {
-        let errorMessage = 'Failed to get analysis results';
+        let errorMessage = 'Không thể lấy kết quả phân tích';
         try {
           const errorData = await resultsResponse.json();
           errorMessage = errorData.error || errorMessage;
@@ -145,28 +145,28 @@ export default function App() {
       let resultData: AnalysisResult;
       try {
         resultData = await resultsResponse.json();
-        console.log('Received result data:', resultData);
+        console.log('Đã nhận dữ liệu kết quả:', resultData);
       } catch (parseError) {
-        console.error('Failed to parse JSON response:', parseError);
+        console.error('Không thể parse JSON response:', parseError);
         const textResponse = await resultsResponse.text();
-        console.error('Response text:', textResponse);
-        throw new Error('Invalid JSON response from server');
+        console.error('Nội dung response:', textResponse);
+        throw new Error('Phản hồi JSON không hợp lệ từ server');
       }
       
-      // Validate required fields
+      // Kiểm tra các trường bắt buộc
       if (!resultData.personalityResult || !resultData.potentialResult) {
-        console.error('Missing required fields in response:', resultData);
-        throw new Error('Invalid response format from server: missing required fields');
+        console.error('Thiếu các trường bắt buộc trong response:', resultData);
+        throw new Error('Định dạng response không hợp lệ: thiếu các trường bắt buộc');
       }
       
-      // Ensure web is an object (can be null/undefined from backend)
+      // Đảm bảo web là object (có thể null/undefined từ backend)
       if (!resultData.web) {
         resultData.web = {};
       }
       
       setResults(resultData);
       
-      // Scroll to results on mobile
+      // Cuộn đến kết quả trên mobile
       if (window.innerWidth < 1024) {
         setTimeout(() => {
           const resultsSection = document.querySelector('[data-results-panel]');
@@ -174,12 +174,12 @@ export default function App() {
         }, 100);
       }
     } catch (err) {
-      let errorMessage = "Failed to analyze profile. Please try again.";
+      let errorMessage = "Phân tích hồ sơ thất bại. Vui lòng thử lại.";
       
       if (err instanceof Error) {
         errorMessage = err.message;
       } else if (err instanceof TypeError && err.message.includes('fetch')) {
-        errorMessage = "Cannot connect to server. Please check if the backend is running.";
+        errorMessage = "Không thể kết nối đến server. Vui lòng kiểm tra backend đã chạy chưa.";
       }
       
       setError(errorMessage);
@@ -264,7 +264,7 @@ export default function App() {
 
   return (
     <div className="dark min-h-screen bg-[#0a0a0a] text-foreground relative overflow-hidden">
-      {/* Button to go back to cover page */}
+      {/* Nút quay lại trang bìa */}
       <div className="fixed top-4 left-4 z-50">
         <Button
           onClick={() => setShowCoverPage(true)}
@@ -336,7 +336,7 @@ export default function App() {
       {/* Main Content */}
       <main className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 relative">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
-          {/* Left Panel - Input Form */}
+          {/* Panel trái - Form nhập liệu */}
           <motion.div 
             className="order-1"
             initial={{ opacity: 0, x: -20 }}
@@ -350,7 +350,7 @@ export default function App() {
             />
           </motion.div>
 
-          {/* Right Panel - Results */}
+          {/* Panel phải - Kết quả */}
           <motion.div 
             className="order-2"
             data-results-panel

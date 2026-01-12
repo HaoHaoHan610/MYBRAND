@@ -75,7 +75,7 @@ export function ResultsPanel({ results, isLoading, error, onRetry }: ResultsPane
   const copyToClipboard = (text: string, section: string) => {
     navigator.clipboard.writeText(text);
     setCopiedSection(section);
-    toast.success(`${section} copied to clipboard`);
+    toast.success(`Đã sao chép ${section}`);
     setTimeout(() => setCopiedSection(null), 2000);
   };
 

@@ -17,49 +17,49 @@ interface ProfileFormProps {
 }
 
 export function ProfileForm({ onAnalyze, onReset, isLoading }: ProfileFormProps) {
-  // Personal Profile State
-  const [hobbies, setHobbies] = useState<string[]>(["Reading", "Coding"]);
+  // Trạng thái Hồ sơ Cá nhân
+  const [hobbies, setHobbies] = useState<string[]>(["Đọc sách", "Lập trình"]);
   const [hobbyInput, setHobbyInput] = useState("");
   
-  const [personality, setPersonality] = useState<string[]>(["Analytical", "Creative"]);
+  const [personality, setPersonality] = useState<string[]>(["Phân tích", "Sáng tạo"]);
   const [personalityInput, setPersonalityInput] = useState("");
   
-  const [uniqueBrand, setUniqueBrand] = useState("Problem solver with creative thinking");
+  const [uniqueBrand, setUniqueBrand] = useState("Giải quyết vấn đề với tư duy sáng tạo");
   const [studyStyle, setStudyStyle] = useState("hands-on");
   
-  const [excitingTopics, setExcitingTopics] = useState<string[]>(["AI", "Web Development"]);
+  const [excitingTopics, setExcitingTopics] = useState<string[]>(["AI", "Phát triển Web"]);
   const [topicInput, setTopicInput] = useState("");
   
   const [shortTermGoals, setShortTermGoals] = useState<string[]>([
-    "Complete internship",
-    "Build portfolio",
+    "Hoàn thành thực tập",
+    "Xây dựng portfolio",
   ]);
   const [longTermGoals, setLongTermGoals] = useState<string[]>([
-    "Senior developer role",
-    "Tech lead position",
+    "Vị trí Senior Developer",
+    "Vị trí Tech Lead",
   ]);
   const [shortGoalInput, setShortGoalInput] = useState("");
   const [longGoalInput, setLongGoalInput] = useState("");
 
-  // Potential Analysis State
-  const [major, setMajor] = useState("Computer Science");
+  // Trạng thái Phân tích Tiềm năng
+  const [major, setMajor] = useState("Khoa học Máy tính");
   const [gpa, setGpa] = useState("3.8");
   const [year, setYear] = useState("3");
   
   const [strengths, setStrengths] = useState<string[]>([
-    "Problem Solving",
-    "Team Collaboration",
+    "Giải quyết vấn đề",
+    "Làm việc nhóm",
   ]);
   const [strengthInput, setStrengthInput] = useState("");
   
   const [languages, setLanguages] = useState<Array<{ key: string; value: string }>>([
-    { key: "English", value: "Native" },
-    { key: "Spanish", value: "Intermediate" },
+    { key: "Tiếng Anh", value: "Bản ngữ" },
+    { key: "Tiếng Tây Ban Nha", value: "Trung cấp" },
   ]);
   
   const [achievements, setAchievements] = useState<string[]>([
-    "Dean's List 2024",
-    "Hackathon Winner",
+    "Danh sách Hiệu trưởng 2024",
+    "Giải nhất Hackathon",
   ]);
   const [achievementInput, setAchievementInput] = useState("");
   
@@ -82,25 +82,25 @@ export function ProfileForm({ onAnalyze, onReset, isLoading }: ProfileFormProps)
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Validation
+    // Xác thực
     const newErrors: Record<string, string> = {};
 
-    if (!major.trim()) newErrors.major = "Major is required";
+    if (!major.trim()) newErrors.major = "Chuyên ngành là bắt buộc";
     if (!gpa || parseFloat(gpa) < 0 || parseFloat(gpa) > 4) {
-      newErrors.gpa = "GPA must be between 0 and 4";
+      newErrors.gpa = "GPA phải từ 0 đến 4";
     }
     if (!year || parseInt(year) < 1 || parseInt(year) > 6) {
-      newErrors.year = "Year must be between 1 and 6";
+      newErrors.year = "Năm học phải từ 1 đến 6";
     }
-    if (!uniqueBrand.trim()) newErrors.uniqueBrand = "Unique brand is required";
-    if (hobbies.length === 0) newErrors.hobbies = "Add at least one hobby";
-    if (personality.length === 0) newErrors.personality = "Add at least one personality trait";
-    if (excitingTopics.length === 0) newErrors.excitingTopics = "Add at least one topic";
-    if (strengths.length === 0) newErrors.strengths = "Add at least one strength";
+    if (!uniqueBrand.trim()) newErrors.uniqueBrand = "Thương hiệu cá nhân là bắt buộc";
+    if (hobbies.length === 0) newErrors.hobbies = "Thêm ít nhất một sở thích";
+    if (personality.length === 0) newErrors.personality = "Thêm ít nhất một đặc điểm tính cách";
+    if (excitingTopics.length === 0) newErrors.excitingTopics = "Thêm ít nhất một chủ đề";
+    if (strengths.length === 0) newErrors.strengths = "Thêm ít nhất một điểm mạnh";
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
-      toast.error("Please fill in all required fields correctly");
+      toast.error("Vui lòng điền đầy đủ các trường bắt buộc");
       return;
     }
 
@@ -147,19 +147,19 @@ export function ProfileForm({ onAnalyze, onReset, isLoading }: ProfileFormProps)
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      {/* Personal Profile Section */}
+      {/* Phần Hồ sơ Cá nhân */}
       <Card className="bg-[#111111] border-white/10">
         <CardHeader>
           <div className="flex items-center gap-2">
             <User className="h-5 w-5 text-emerald-400" />
-            <CardTitle className="text-xl">Personal Profile</CardTitle>
+            <CardTitle className="text-xl">Hồ sơ Cá nhân</CardTitle>
           </div>
-          <CardDescription>Tell us about yourself and your interests</CardDescription>
+          <CardDescription>Cho chúng tôi biết về bản thân và sở thích của bạn</CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
-          {/* Hobbies */}
+          {/* Sở thích */}
           <div className="space-y-2">
-            <Label htmlFor="hobbies">Hobbies</Label>
+            <Label htmlFor="hobbies">Sở thích</Label>
             <div className="flex gap-2">
               <Input
                 id="hobbies"
@@ -172,7 +172,7 @@ export function ProfileForm({ onAnalyze, onReset, isLoading }: ProfileFormProps)
                     setHobbyInput("");
                   }
                 }}
-                placeholder="Type and press Enter"
+                placeholder="Nhập và nhấn Enter"
                 className="bg-[#1a1a1a] border-white/10"
               />
               <Button
@@ -214,9 +214,9 @@ export function ProfileForm({ onAnalyze, onReset, isLoading }: ProfileFormProps)
             )}
           </div>
 
-          {/* Personality */}
+          {/* Tính cách */}
           <div className="space-y-2">
-            <Label htmlFor="personality">Personality Traits</Label>
+            <Label htmlFor="personality">Đặc điểm Tính cách</Label>
             <div className="flex gap-2">
               <Input
                 id="personality"
@@ -229,7 +229,7 @@ export function ProfileForm({ onAnalyze, onReset, isLoading }: ProfileFormProps)
                     setPersonalityInput("");
                   }
                 }}
-                placeholder="Type and press Enter"
+                placeholder="Nhập và nhấn Enter"
                 className="bg-[#1a1a1a] border-white/10"
               />
               <Button
@@ -271,14 +271,14 @@ export function ProfileForm({ onAnalyze, onReset, isLoading }: ProfileFormProps)
             )}
           </div>
 
-          {/* Unique Brand */}
+          {/* Thương hiệu Cá nhân */}
           <div className="space-y-2">
-            <Label htmlFor="uniqueBrand">Unique Brand</Label>
+            <Label htmlFor="uniqueBrand">Thương hiệu Cá nhân</Label>
             <Input
               id="uniqueBrand"
               value={uniqueBrand}
               onChange={(e) => setUniqueBrand(e.target.value)}
-              placeholder="What makes you unique?"
+              placeholder="Điều gì làm bạn trở nên độc đáo?"
               className="bg-[#1a1a1a] border-white/10"
             />
             {errors.uniqueBrand && (
@@ -289,25 +289,25 @@ export function ProfileForm({ onAnalyze, onReset, isLoading }: ProfileFormProps)
             )}
           </div>
 
-          {/* Study Style */}
+          {/* Phong cách Học tập */}
           <div className="space-y-2">
-            <Label htmlFor="studyStyle">Study Style</Label>
+            <Label htmlFor="studyStyle">Phong cách Học tập</Label>
             <Select value={studyStyle} onValueChange={setStudyStyle}>
               <SelectTrigger className="bg-[#1a1a1a] border-white/10">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent className="bg-[#1a1a1a] border-white/10">
-                <SelectItem value="visual">Visual Learner</SelectItem>
-                <SelectItem value="auditory">Auditory Learner</SelectItem>
-                <SelectItem value="reading">Reading/Writing</SelectItem>
-                <SelectItem value="hands-on">Hands-on/Kinesthetic</SelectItem>
+                <SelectItem value="visual">Học qua hình ảnh</SelectItem>
+                <SelectItem value="auditory">Học qua âm thanh</SelectItem>
+                <SelectItem value="reading">Học qua đọc/viết</SelectItem>
+                <SelectItem value="hands-on">Học qua thực hành</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
-          {/* Exciting Topics */}
+          {/* Chủ đề Thú vị */}
           <div className="space-y-2">
-            <Label htmlFor="topics">Exciting Topics</Label>
+            <Label htmlFor="topics">Chủ đề Thú vị</Label>
             <div className="flex gap-2">
               <Input
                 id="topics"
@@ -320,7 +320,7 @@ export function ProfileForm({ onAnalyze, onReset, isLoading }: ProfileFormProps)
                     setTopicInput("");
                   }
                 }}
-                placeholder="Type and press Enter"
+                placeholder="Nhập và nhấn Enter"
                 className="bg-[#1a1a1a] border-white/10"
               />
               <Button
@@ -362,13 +362,13 @@ export function ProfileForm({ onAnalyze, onReset, isLoading }: ProfileFormProps)
             )}
           </div>
 
-          {/* Goals */}
+          {/* Mục tiêu */}
           <div className="space-y-4">
-            <Label>Goals</Label>
+            <Label>Mục tiêu</Label>
             
-            {/* Short-term Goals */}
+            {/* Mục tiêu Ngắn hạn */}
             <div className="space-y-2">
-              <p className="text-sm text-muted-foreground">Short-term</p>
+              <p className="text-sm text-muted-foreground">Ngắn hạn</p>
               <div className="flex gap-2">
                 <Input
                   value={shortGoalInput}
@@ -380,7 +380,7 @@ export function ProfileForm({ onAnalyze, onReset, isLoading }: ProfileFormProps)
                       setShortGoalInput("");
                     }
                   }}
-                  placeholder="Add short-term goal"
+                  placeholder="Thêm mục tiêu ngắn hạn"
                   className="bg-[#1a1a1a] border-white/10"
                 />
                 <Button
@@ -415,9 +415,9 @@ export function ProfileForm({ onAnalyze, onReset, isLoading }: ProfileFormProps)
               </ul>
             </div>
 
-            {/* Long-term Goals */}
+            {/* Mục tiêu Dài hạn */}
             <div className="space-y-2">
-              <p className="text-sm text-muted-foreground">Long-term</p>
+              <p className="text-sm text-muted-foreground">Dài hạn</p>
               <div className="flex gap-2">
                 <Input
                   value={longGoalInput}
@@ -429,7 +429,7 @@ export function ProfileForm({ onAnalyze, onReset, isLoading }: ProfileFormProps)
                       setLongGoalInput("");
                     }
                   }}
-                  placeholder="Add long-term goal"
+                  placeholder="Thêm mục tiêu dài hạn"
                   className="bg-[#1a1a1a] border-white/10"
                 />
                 <Button
@@ -467,24 +467,24 @@ export function ProfileForm({ onAnalyze, onReset, isLoading }: ProfileFormProps)
         </CardContent>
       </Card>
 
-      {/* Potential Analysis Section */}
+      {/* Phần Phân tích Tiềm năng */}
       <Card className="bg-[#111111] border-white/10">
         <CardHeader>
           <div className="flex items-center gap-2">
             <GraduationCap className="h-5 w-5 text-blue-400" />
-            <CardTitle className="text-xl">Potential Analysis</CardTitle>
+            <CardTitle className="text-xl">Phân tích Tiềm năng</CardTitle>
           </div>
-          <CardDescription>Academic background and capabilities</CardDescription>
+          <CardDescription>Nền tảng học thuật và khả năng</CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
-          {/* Major */}
+          {/* Chuyên ngành */}
           <div className="space-y-2">
-            <Label htmlFor="major">Major</Label>
+            <Label htmlFor="major">Chuyên ngành</Label>
             <Input
               id="major"
               value={major}
               onChange={(e) => setMajor(e.target.value)}
-              placeholder="e.g., Computer Science"
+              placeholder="Ví dụ: Khoa học Máy tính"
               className="bg-[#1a1a1a] border-white/10"
             />
             {errors.major && (
@@ -536,9 +536,9 @@ export function ProfileForm({ onAnalyze, onReset, isLoading }: ProfileFormProps)
             </div>
           </div>
 
-          {/* Strengths */}
+          {/* Điểm mạnh */}
           <div className="space-y-2">
-            <Label htmlFor="strengths">Strengths</Label>
+            <Label htmlFor="strengths">Điểm mạnh</Label>
             <div className="flex gap-2">
               <Input
                 id="strengths"
@@ -551,7 +551,7 @@ export function ProfileForm({ onAnalyze, onReset, isLoading }: ProfileFormProps)
                     setStrengthInput("");
                   }
                 }}
-                placeholder="Type and press Enter"
+                placeholder="Nhập và nhấn Enter"
                 className="bg-[#1a1a1a] border-white/10"
               />
               <Button
@@ -593,10 +593,10 @@ export function ProfileForm({ onAnalyze, onReset, isLoading }: ProfileFormProps)
             )}
           </div>
 
-          {/* Languages */}
+          {/* Ngôn ngữ */}
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <Label>Languages</Label>
+              <Label>Ngôn ngữ</Label>
               <Button
                 type="button"
                 size="sm"
@@ -605,7 +605,7 @@ export function ProfileForm({ onAnalyze, onReset, isLoading }: ProfileFormProps)
                 className="h-8 border-white/10 bg-[#1a1a1a]"
               >
                 <Plus className="h-3.5 w-3.5 mr-1" />
-                Add
+                Thêm
               </Button>
             </div>
             <div className="space-y-2">
@@ -614,13 +614,13 @@ export function ProfileForm({ onAnalyze, onReset, isLoading }: ProfileFormProps)
                   <Input
                     value={lang.key}
                     onChange={(e) => updateLanguage(idx, "key", e.target.value)}
-                    placeholder="Language"
+                    placeholder="Ngôn ngữ"
                     className="bg-[#1a1a1a] border-white/10"
                   />
                   <Input
                     value={lang.value}
                     onChange={(e) => updateLanguage(idx, "value", e.target.value)}
-                    placeholder="Level"
+                    placeholder="Trình độ"
                     className="bg-[#1a1a1a] border-white/10"
                   />
                   <Button
@@ -637,9 +637,9 @@ export function ProfileForm({ onAnalyze, onReset, isLoading }: ProfileFormProps)
             </div>
           </div>
 
-          {/* Achievements */}
+          {/* Thành tựu */}
           <div className="space-y-2">
-            <Label htmlFor="achievements">Achievements</Label>
+            <Label htmlFor="achievements">Thành tựu</Label>
             <div className="flex gap-2">
               <Input
                 id="achievements"
@@ -652,7 +652,7 @@ export function ProfileForm({ onAnalyze, onReset, isLoading }: ProfileFormProps)
                     setAchievementInput("");
                   }
                 }}
-                placeholder="Type and press Enter"
+                placeholder="Nhập và nhấn Enter"
                 className="bg-[#1a1a1a] border-white/10"
               />
               <Button
@@ -687,12 +687,12 @@ export function ProfileForm({ onAnalyze, onReset, isLoading }: ProfileFormProps)
             </ul>
           </div>
 
-          {/* Mentor Toggle */}
+          {/* Tùy chọn Cố vấn */}
           <div className="flex items-center justify-between p-4 bg-[#1a1a1a] rounded-lg border border-white/10">
             <div className="space-y-0.5">
-              <Label htmlFor="mentor">Open to Mentorship</Label>
+              <Label htmlFor="mentor">Sẵn sàng Cố vấn</Label>
               <p className="text-sm text-muted-foreground">
-                Willing to mentor others or be mentored
+                Sẵn sàng cố vấn người khác hoặc được cố vấn
               </p>
             </div>
             <Switch id="mentor" checked={mentor} onCheckedChange={setMentor} />
@@ -700,7 +700,7 @@ export function ProfileForm({ onAnalyze, onReset, isLoading }: ProfileFormProps)
         </CardContent>
       </Card>
 
-      {/* Action Buttons */}
+      {/* Nút Hành động */}
       <div className="flex gap-4">
         <Button
           type="submit"
@@ -710,10 +710,10 @@ export function ProfileForm({ onAnalyze, onReset, isLoading }: ProfileFormProps)
           {isLoading ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Analyzing...
+              Đang phân tích...
             </>
           ) : (
-            "Analyze Profile"
+            "Phân tích Hồ sơ"
           )}
         </Button>
         <Button
@@ -723,7 +723,7 @@ export function ProfileForm({ onAnalyze, onReset, isLoading }: ProfileFormProps)
           disabled={isLoading}
           className="border-white/10 bg-[#1a1a1a]"
         >
-          Reset
+          Đặt lại
         </Button>
       </div>
     </form>
