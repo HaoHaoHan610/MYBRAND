@@ -15,6 +15,11 @@ def create_app():
     @app.route('/')
     def home():
         return '<h1>Khanh bu cu</h1>'
+    
+    @app.route('/health')
+    def health():
+        return jsonify({"status": "ok", "service": "mybrand-backend"}), 200
+    
     return app
 
 # Create app instance at module level for Gunicorn
