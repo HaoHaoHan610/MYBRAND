@@ -1,26 +1,26 @@
 {
   "hobbies": [
-    "Reading",
-    "Coding"
+    "Đọc sách",
+    "Lập trình"
   ],
   "personality": [
-    "Analytical",
-    "Creative"
+    "Phân tích",
+    "Sáng tạo"
   ],
-  "unique_brand": "Problem solver with creative thinking",
+  "unique_brand": "Giải quyết vấn đề với tư duy sáng tạo",
   "study_style": "hands-on",
   "exciting_topics": [
     "AI",
-    "Web Development"
+    "Phát triển Web"
   ],
   "goals": {
     "short_term": [
-      "Complete internship",
-      "Build portfolio"
+      "Hoàn thành thực tập",
+      "Xây dựng portfolio"
     ],
     "long_term": [
-      "Senior developer role",
-      "Tech lead position"
+      "Vị trí Senior Developer",
+      "Vị trí Tech Lead"
     ]
   }
 }

@@ -10,13 +10,12 @@ class improvingSchema(Schema):
 
 
 class RubricScoreSchema(Schema):
-    academic = fields.Int(required=True)  # 10
-    skills = fields.Int(required=True)  # 20
-    proof = fields.Int(required=True)  # 25
-    positioning = fields.Int(required=True)  # 20
-    goals = fields.Int(required=True)  # 15
-    coherence = fields.Int(required=True)  # 5
-    execution = fields.Int(required=True)  # 5
+    professional_knowledge = fields.Int(required=True)  # 20 - Kiến thức chuyên môn
+    practical_skills = fields.Int(required=True)  # 20 - Kỹ năng thực hành
+    experience_achievements = fields.Int(required=True)  # 20 - Kinh nghiệm & thành tựu
+    personal_branding = fields.Int(required=True)  # 15 - Định vị cá nhân
+    goals_vision = fields.Int(required=True)  # 15 - Mục tiêu & tầm nhìn
+    growth_potential = fields.Int(required=True)  # 10 - Tiềm năng phát triển
 
 
 class ConclusionSchema(Schema):

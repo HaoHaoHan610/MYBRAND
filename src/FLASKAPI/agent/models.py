@@ -79,13 +79,12 @@ class improving(BaseModel):
 
 
 class RubricScore(BaseModel):
-    academic: int # 10
-    skills: int # 20
-    proof: int # 25
-    positioning: int # 20
-    goals: int # 15
-    coherence: int # 5
-    execution: int # 5
+    professional_knowledge: int # 20 - Kiến thức chuyên môn
+    practical_skills: int # 20 - Kỹ năng thực hành
+    experience_achievements: int # 20 - Kinh nghiệm & thành tựu
+    personal_branding: int # 15 - Định vị cá nhân
+    goals_vision: int # 15 - Mục tiêu & tầm nhìn
+    growth_potential: int # 10 - Tiềm năng phát triển
 
     def __call__(self) -> Dict[str, Any]:
         return self.model_dump()
@@ -98,13 +97,12 @@ class RubricScore(BaseModel):
     
     def _overall(self) -> Dict[float,str]:
         score = (
-                self.academic + 
-                self.skills + 
-                self.proof + 
-                self.positioning + 
-                self.goals + 
-                self.coherence +
-                self.execution
+                self.professional_knowledge + 
+                self.practical_skills + 
+                self.experience_achievements + 
+                self.personal_branding + 
+                self.goals_vision + 
+                self.growth_potential
                 )/100
         kind = ""
         

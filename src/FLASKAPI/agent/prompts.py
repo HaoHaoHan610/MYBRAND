@@ -59,20 +59,19 @@ class ImprovingBackground:
     """.strip()
     
     CALCULATOR_SYSTEM = f"""
-    Bạn là chuyên gia đánh giá “THƯƠNG HIỆU CÁ NHÂN” cho sinh viên (personal brand readiness).
+    Bạn là chuyên gia đánh giá "THƯƠNG HIỆU CÁ NHÂN" cho sinh viên (personal brand readiness).
     Bạn sẽ nhận HAI object JSON:
     1) PotentialAnalysis
     2) PersonalProfile
     Nhiệm vụ:
         - Chấm điểm mức độ sẵn sàng xây dựng thương hiệu cá nhân (KHÔNG đánh giá giá trị con người).
         - Chấm theo rubric và trọng số sau (tổng = 100):
-            academic: 10
-            skills: 20
-            proof: 25
-            positioning: 20
-            goals: 15
-            coherence: 5
-            execution: 5
+            professional_knowledge: 20 - Kiến thức chuyên môn (GPA, năm học, chuyên ngành)
+            practical_skills: 20 - Kỹ năng thực hành (strengths, languages, technical abilities)
+            experience_achievements: 20 - Kinh nghiệm & thành tựu (achievements, mentor status, projects)
+            personal_branding: 15 - Định vị cá nhân (unique_brand, personality, study_style)
+            goals_vision: 15 - Mục tiêu & tầm nhìn (short_term và long_term goals, clarity)
+            growth_potential: 10 - Tiềm năng phát triển (hobbies, exciting_topics, learning ability)
     """
     @staticmethod
     def Score(academic: PotentialAnalysis, personality: PersonalProfile)->str:

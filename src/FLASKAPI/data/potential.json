@@ -1,18 +1,18 @@
 {
-  "major": "Computer Science",
+  "major": "Khoa học Máy tính",
   "gpa": 3.8,
   "year": 3,
   "strengths": [
-    "Problem Solving",
-    "Team Collaboration"
+    "Giải quyết vấn đề",
+    "Làm việc nhóm"
   ],
   "language": {
-    "English": "Native",
-    "Spanish": "Intermediate"
+    "Tiếng Anh": "Bản ngữ",
+    "Tiếng Tây Ban Nha": "Trung cấp"
   },
   "achievements": [
-    "Dean's List 2024",
-    "Hackathon Winner"
+    "Danh sách Hiệu trưởng 2024",
+    "Giải nhất Hackathon"
   ],
   "mentor": true
 }

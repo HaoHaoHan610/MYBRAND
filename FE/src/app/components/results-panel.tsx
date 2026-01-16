@@ -186,73 +186,70 @@ export function ResultsPanel({ results, isLoading, error, onRetry }: ResultsPane
     ));
   };
 
-  // Max scores for each metric (from backend schema comments)
+  // Điểm tối đa cho mỗi thông số
   const maxScores = {
-    academic: 10,
-    skills: 20,
-    proof: 25,
-    positioning: 20,
-    goals: 15,
-    coherence: 5,
-    execution: 5,
+    professional_knowledge: 20,
+    practical_skills: 20,
+    experience_achievements: 20,
+    personal_branding: 15,
+    goals_vision: 15,
+    growth_potential: 10,
   };
 
   const rubricMetrics = [
     { 
-      key: "academic",
-      name: "Học thuật", 
-      value: results.rubricResult.academic, 
-      max: maxScores.academic,
-      percentage: (results.rubricResult.academic / maxScores.academic) * 100,
-      color: "bg-blue-500" 
+      key: "professional_knowledge",
+      name: "Kiến thức Chuyên môn", 
+      value: results.rubricResult.professional_knowledge, 
+      max: maxScores.professional_knowledge,
+      percentage: (results.rubricResult.professional_knowledge / maxScores.professional_knowledge) * 100,
+      color: "bg-blue-500",
+      description: "Nền tảng kiến thức và hiểu biết chuyên sâu"
     },
     { 
-      key: "skills",
-      name: "Kỹ năng", 
-      value: results.rubricResult.skills, 
-      max: maxScores.skills,
-      percentage: (results.rubricResult.skills / maxScores.skills) * 100,
-      color: "bg-emerald-500" 
+      key: "practical_skills",
+      name: "Kỹ năng Thực hành", 
+      value: results.rubricResult.practical_skills, 
+      max: maxScores.practical_skills,
+      percentage: (results.rubricResult.practical_skills / maxScores.practical_skills) * 100,
+      color: "bg-emerald-500",
+      description: "Khả năng áp dụng kiến thức vào thực tế"
     },
     { 
-      key: "proof",
-      name: "Bằng chứng", 
-      value: results.rubricResult.proof, 
-      max: maxScores.proof,
-      percentage: (results.rubricResult.proof / maxScores.proof) * 100,
-      color: "bg-purple-500" 
+      key: "experience_achievements",
+      name: "Kinh nghiệm & Thành tựu", 
+      value: results.rubricResult.experience_achievements, 
+      max: maxScores.experience_achievements,
+      percentage: (results.rubricResult.experience_achievements / maxScores.experience_achievements) * 100,
+      color: "bg-purple-500",
+      description: "Trải nghiệm và những thành tích đạt được"
     },
     { 
-      key: "positioning",
-      name: "Định vị", 
-      value: results.rubricResult.positioning, 
-      max: maxScores.positioning,
-      percentage: (results.rubricResult.positioning / maxScores.positioning) * 100,
-      color: "bg-amber-500" 
+      key: "personal_branding",
+      name: "Định vị Cá nhân", 
+      value: results.rubricResult.personal_branding, 
+      max: maxScores.personal_branding,
+      percentage: (results.rubricResult.personal_branding / maxScores.personal_branding) * 100,
+      color: "bg-amber-500",
+      description: "Sự khác biệt và giá trị độc đáo của bạn"
     },
     { 
-      key: "goals",
-      name: "Mục tiêu", 
-      value: results.rubricResult.goals, 
-      max: maxScores.goals,
-      percentage: (results.rubricResult.goals / maxScores.goals) * 100,
-      color: "bg-pink-500" 
+      key: "goals_vision",
+      name: "Mục tiêu & Tầm nhìn", 
+      value: results.rubricResult.goals_vision, 
+      max: maxScores.goals_vision,
+      percentage: (results.rubricResult.goals_vision / maxScores.goals_vision) * 100,
+      color: "bg-pink-500",
+      description: "Định hướng và kế hoạch phát triển"
     },
     { 
-      key: "coherence",
-      name: "Tính mạch lạc", 
-      value: results.rubricResult.coherence, 
-      max: maxScores.coherence,
-      percentage: (results.rubricResult.coherence / maxScores.coherence) * 100,
-      color: "bg-cyan-500" 
-    },
-    { 
-      key: "execution",
-      name: "Thực thi", 
-      value: results.rubricResult.execution, 
-      max: maxScores.execution,
-      percentage: (results.rubricResult.execution / maxScores.execution) * 100,
-      color: "bg-orange-500" 
+      key: "growth_potential",
+      name: "Tiềm năng Phát triển", 
+      value: results.rubricResult.growth_potential, 
+      max: maxScores.growth_potential,
+      percentage: (results.rubricResult.growth_potential / maxScores.growth_potential) * 100,
+      color: "bg-cyan-500",
+      description: "Khả năng học hỏi và phát triển trong tương lai"
     },
   ];
 
@@ -498,9 +495,14 @@ export function ResultsPanel({ results, isLoading, error, onRetry }: ResultsPane
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.7 + idx * 0.1 }}
                 >
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm">{metric.name}</span>
-                    <span className="font-mono text-sm text-muted-foreground">
+                  <div className="flex items-center justify-between mb-1">
+                    <div className="flex-1">
+                      <span className="text-sm font-medium">{metric.name}</span>
+                      {metric.description && (
+                        <p className="text-xs text-muted-foreground mt-0.5">{metric.description}</p>
+                      )}
+                    </div>
+                    <span className="font-mono text-sm text-muted-foreground ml-4">
                       {Math.round(animatedValue)}/{metric.max} ({Math.round(animatedPercentage)}%)
                     </span>
                   </div>

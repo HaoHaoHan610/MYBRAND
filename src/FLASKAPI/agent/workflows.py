@@ -91,13 +91,12 @@ class WorkFlow:
         except Exception as e:
             print(str(e))
             return RubricScore(
-                    academic=0,
-                    goals = 0,
-                    skills=0,
-                    proof=0,
-                    positioning=0,
-                    coherence=0,
-                    execution=0
+                    professional_knowledge=0,
+                    practical_skills=0,
+                    experience_achievements=0,
+                    personal_branding=0,
+                    goals_vision=0,
+                    growth_potential=0
                 )
 
     def _search_information(self,advide:improving):

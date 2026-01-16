@@ -41,13 +41,12 @@ export interface AnalysisResult {
     certificatin_course: string;
   };
   rubricResult: {
-    academic: number;
-    skills: number;
-    proof: number;
-    positioning: number;
-    goals: number;
-    coherence: number;
-    execution: number;
+    professional_knowledge: number;
+    practical_skills: number;
+    experience_achievements: number;
+    personal_branding: number;
+    goals_vision: number;
+    growth_potential: number;
   };
   web: Record<string, string>; // Dict {title: url}
 }
