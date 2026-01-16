@@ -6,7 +6,6 @@ from api.controllers.output import bp as bp_output
 def create_app():
     app = Flask(__name__)
     
-    # Enable CORS for all routes
     CORS(app, resources={r"/*": {"origins": "*"}})
     
     app.register_blueprint(bp_input)
